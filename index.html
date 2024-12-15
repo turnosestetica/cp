@@ -144,12 +144,9 @@
     }
     #imc-result {
         margin-top: 10px;
-        font-size: 18px;
-        font-weight: bold;
-        background-color: #f2f2f2;
+        font-size: 17px;
         padding: 10px;
-        border-radius: 5px;
-        border: 1px solid #ddd;
+   
     }
     .select-wrapper {
         position: relative;
@@ -171,7 +168,15 @@
 </style>
 
 <div class="popover" aria-labelledby="popoverLabel" aria-hidden="true">
-    <form id="multi_step_form" style="text-align: left;font-size:14px; background-color: white;" autocomplete="new-password">
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <div>
+    <img src="https://www.cpcirugiaestetica.com/images/logo.png">
+  </div>
+  <div style="margin-left:20px;">
+    <span style="font-size: 1em;">📍</span> Mayor Arruabarrena 1792 - Córdoba Capital - Argentina
+  </div>
+</div>
+<form id="multi_step_form" style="text-align: left;font-size:14px; background-color: white;" autocomplete="new-password">
 			<p style="padding: 10px; text-align: center; background-color: lightyellow; font-size: 17px;">Averigua ahora si eres candidata a Lipoescultura</p>
 			<div class="step" id="step1">
             <p class="question-title">Ingresa tu peso y tu altura</p>
@@ -367,30 +372,43 @@
         jQuery('#date').change(populateHourSelect);
     });
 
-    function populateWeightSelect() {
-        const select = jQuery('#peso');
-        for (let i = 40; i <= 150; i++) { // Assuming weight range from 40kg to 150kg
-            for (let j = 0; j < 10; j++) {
-                let weight = i + (j / 10);
-                let weightStr = weight.toFixed(1).replace('.', ',');
-                select.append(jQuery('<option>', {
-                    value: weight.toFixed(1),
-                    text: weightStr + ' kg'
-                }));
-            }
-        }
-    }
-
-    function populateHeightSelect() {
-        const select = jQuery('#altura');
-        for (let i = 140; i <= 200; i++) { // Assuming height range from 140cm to 200cm
+  function populateWeightSelect() {
+    const select = jQuery('#peso');
+    select.empty(); // Limpiar opciones existentes
+    select.append(jQuery('<option>', {
+        value: '',
+        text: 'Seleccione',
+        selected: true,
+        disabled: true
+    }));
+    for (let i = 40; i <= 150; i++) {
+        for (let j = 0; j < 10; j++) {
+            let weight = i + (j / 10);
+            let weightStr = weight.toFixed(1).replace('.', ',');
             select.append(jQuery('<option>', {
-                value: i,
-                text: i + ' cm'
+                value: weight.toFixed(1),
+                text: weightStr + ' kg'
             }));
         }
     }
+}
 
+function populateHeightSelect() {
+    const select = jQuery('#altura');
+    select.empty(); // Limpiar opciones existentes
+    select.append(jQuery('<option>', {
+        value: '',
+        text: 'Seleccione',
+        selected: true,
+        disabled: true
+    }));
+    for (let i = 140; i <= 200; i++) {
+        select.append(jQuery('<option>', {
+            value: i,
+            text: i + ' cm'
+        }));
+    }
+}
     function calculateIMC() {
         const peso = parseFloat(jQuery('#peso').val());
         const altura = parseFloat(jQuery('#altura').val()) / 100; // Convertir cm a metros
