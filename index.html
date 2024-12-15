@@ -706,7 +706,10 @@
                 // Hide current step and show next step
                 currentStepElement.hide();
                 nextStepElement.show();
-                window.scrollTo(0, 0);
+                // Enfocar en el inicio del formulario
+    jQuery('html, body').animate({
+        scrollTop: jQuery("#multi_step_form").offset().top
+    }, 500);
             }
         </script>
     </div>
