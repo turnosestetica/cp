@@ -1,697 +1,716 @@
 <!DOCTYPE html>
 <html>
 
-<body>
-<div class="thrv_wrapper thrv_custom_html_shortcode tve-droppable" data-tve-custom-html="1">
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Lipoescultura</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0; /* Importante para evitar márgenes por defecto */
+            padding: 0; /* Importante para evitar paddings por defecto */
+        }
 
-<style>
-    /* General Styling */
-    body {
-        font-family: 'Arial', sans-serif;
-        line-height: 1.6;
-        color: #333;
-    }
-    .popover {
-        max-width: 400px;
-        width: 100%;
-        border: none;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        border-radius: 8px;
-        overflow: hidden;
-    }
-    .continue-btn {
-        line-height: 1.5;
-        width: 90%;
-        font-size: 16px;
-        padding: 10px 20px;
-        font-weight: 600;
-        border-radius: 8px;
-        border: none;
-        background-color: #4ac959;
-        color: white;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-    .continue-btn:hover {
-        background-color: #36a843;
-    }
-    .error-message {
-        color: #dc3545;
-        margin-top: 5px;
-        font-size: 14px;
-    }
-    .step {
-        display: none;
-        padding: 20px;
-    }
-    .question-title {
-        font-weight: bold;
-        margin-bottom: 15px;
-        font-size: 18px;
-    }
-
-    /* Radio Buttons */
-    .radio-container {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 15px;
-    }
-    .radio-container label {
-        margin: 8px 0;
-        font-size: 15px;
-        display: flex;
-        align-items: center;
-    }
-    .radio-container input[type="radio"] {
-        margin-right: 10px;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        width: 20px;
-        height: 20px;
-        border: 2px solid #4ac959;
-        border-radius: 50%;
-        outline: none;
-        transition: 0.2s;
-        cursor: pointer;
-    }
-    .radio-container input[type="radio"]:checked {
-        background-color: #4ac959;
-        box-shadow: inset 0 0 0 3px white;
-    }
-
-    /* Form Fields */
-    label {
-        color: #333;
-        font-weight: 600;
-        margin-bottom: 5px;
-        display: block;
-    }
-    input[type="text"], select {
-        width: calc(100% - 20px);
-        border: 1px solid #ced4da;
-        border-radius: 6px;
-        padding: 10px;
-        margin-bottom: 10px;
-        font-size: 14px;
-    }
-    .validated-whatsapp {
-        background-color: #e9f5e9;
-        padding: 2px 5px;
-        border-radius: 3px;
-        color: #28a745;
-    }
-
-    /* Step 4 Specific Styling */
-    .pricing-info {
-        background-color: #f8f9fa;
-        padding: 15px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-    }
-    .pricing-info p {
-        margin: 5px 0;
-        font-size: 15px !important;
-    }
-    .pricing-info strong {
-        font-size: 16px;
-    }
-
-    /* WhatsApp Validation */
-    #whatsapp-match-feedback {
-        margin-bottom: 15px;
-    }
-
-    /* Final Message */
-    .final-message {
-        font-size: 14px;
-        color: #666;
-        margin-top: 15px;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
         .popover {
-            max-width: 95%;
+            width: 95%; /* Ajustado para mejor responsividad */
+            max-width: 500px; /* Ancho máximo en pantallas grandes */
+            margin: 20px auto; /* Centrado */
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
         }
-    }
-    .form-field-label{
-        margin-bottom: 5px;
-    }
-    .form-field-container{
-        margin-bottom: 15px;
-    }
-    #imc-result {
-        margin-top: 10px;
-        font-size: 17px;
-        padding: 10px;
-   
-    }
-    .select-wrapper {
-        position: relative;
-        width: 100%;
-    }
 
-    .select-wrapper select {
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      padding: 10px;
-      border: 1px solid #ced4da;
-      border-radius: 6px;
-      width: 100%;
-      background-color: #fff;
-      cursor: pointer;
-      font-size: 14px;
-    }
-</style>
-
-<div class="popover" aria-labelledby="popoverLabel" aria-hidden="true">
-<div style="display: flex; justify-content: space-between; align-items: center;">
-  <div>
-    <img src="https://www.cpcirugiaestetica.com/images/logo.png">
-  </div>
-  <div style="margin-left:20px;">
-    <span style="font-size: 1em;">📍</span> Mayor Arruabarrena 1792 - Córdoba Capital - Argentina
-  </div>
-</div>
-<form id="multi_step_form" style="text-align: left;font-size:14px; background-color: white;" autocomplete="new-password">
-			<p style="padding: 10px; text-align: center; background-color: lightyellow; font-size: 17px;">Averigua ahora si eres candidata a Lipoescultura</p>
-			<div class="step" id="step1">
-            <p class="question-title">Ingresa tu peso y tu altura</p>
-            <div class="form-field-container">
-                <label class="form-field-label" for="peso">Peso (kg)</label>
-                <div class="select-wrapper">
-                    <select id="peso" name="peso">
-                        <!-- Options will be added here -->
-                    </select>
-                </div>
-            </div>
-            <div class="form-field-container">
-                <label class="form-field-label" for="altura">Altura (cm)</label>
-                <div class="select-wrapper">
-                    <select id="altura" name="altura">
-                        <!-- Options will be added here -->
-                    </select>
-                </div>
-            </div>
-            <div id="imc-result"></div>
-            <div class="error-message" id="error-step1"></div>
-            <button type="button" class="continue-btn" onclick="nextStep(1)">Siguiente ➜</button>
-        </div>
-
-        <div class="step" id="step2">
-            <p class="question-title">¿Qué tan pronto quieres reservar cirugía para tu lipoescultura?</p>
-            <div class="radio-container">
-                <label><input type="radio" name="urgency" value="Inmediatamente"> Inmediatamente</label>
-                <label><input type="radio" name="urgency" value="Dentro de los próximos 3-6 meses"> Dentro de los próximos 3-6 meses</label>
-                <label><input type="radio" name="urgency" value="Todavía estoy haciendo mi investigación"> Todavía estoy haciendo mi investigación</label>
-            </div>
-            <div class="error-message" id="error-step2"></div>
-            <button type="button" class="continue-btn" onclick="nextStep(2)">Siguiente ➜</button>
-        </div>
-
-        <div class="step" id="step3">
-            <div class="pricing-info">
-                <p class="question-title">Precios Base:</p>
-                <p><strong>Consulta:</strong> $20.000 pesos (pago anticipado obligatorio)</p>
-                <p><strong>Liposucción Vaser:</strong> Elimina grasa localizada utilizando ultrasonido, ideal para definir y contornear. Desde 2500 USD, aproximadamente $2.775.000 pesos.</p>
-                <p><strong>Lipoabdominoplastía:</strong> Combina liposucción con eliminación de piel sobrante en el abdomen. Desde 3000 USD, aproximadamente $3.330.000 pesos.</p>
-                <p><strong>Renuvion:</strong> Tecnología para tensar la piel después de la liposucción. Desde 1500 USD adicionales, aproximadamente $1.665.000 pesos.</p>
-                <p><strong>Aumento mamario:</strong> Implantes mamarios para aumentar el volumen del busto. Desde 3700 USD, aproximadamente $4.107.000 pesos.</p>
-                <p><strong>Otros procedimientos:</strong> Te invitamos a una consulta para evaluar opciones personalizadas.</p>
-                <p class="question-title" style="margin-top: 15px;">Presupuesto:</p>
-                <p>Considerando los precios de referencia, ¿cuentas con el presupuesto para el tratamiento de lipoescultura?</p>
-            </div>
-            <div class="radio-container">
-                <label><input type="radio" name="precio" value="Sí, cuento con el presupuesto"> Sí, cuento con el presupuesto</label>
-                <label><input type="radio" name="precio" value="No cuento con el presupuesto"> No cuento con el presupuesto</label>
-            </div>
-            <div class="error-message" id="error-step3"></div>
-            <button type="button" class="continue-btn" onclick="nextStep(3)">Siguiente ➜</button>
-        </div>
-
-        <div class="step" id="step4">
-            <p class="question-title">Estamos ubicados en Mayor Mario Efrain Arruabarrena 1792, X5000 Córdoba. ¿Puedes asistir sin problema a tu valoración?</p>
-            <div class="radio-container">
-                <label><input type="radio" name="barrier" value="Si">Si</label>
-                <label><input type="radio" name="barrier" value="No sé aún"> No sé aún</label>
-            </div>
-            <div class="error-message" id="error-step4"></div>
-            <button type="button" class="continue-btn" onclick="nextStep(4)">Ver formulario de cita ➜</button>
-        </div>
-
-        <div class="step" id="step5">
-            <p style="background-color: #e9f5e9; margin-bottom: 5px; padding: 10px; font-size: 16px; border-radius: 8px;">¡Eres una potencial candidata a Lipoescultura! Si quieres agendar tu cita de valoración, selecciona debajo la fecha y hora deseada.</p>
-
-            <div id="restoformdatospersonales">
-                <div class="form-field-container">
-                    <label class="form-field-label" for="date">Fecha deseada de tu cita</label>
-                    <select id="date" name="date">
-                        <!-- Fechas serán insertadas aquí -->
-                    </select>
-                </div>
-                <div class="form-field-container">
-                    <label class="form-field-label" for="hour">Hora deseada de tu cita</label>
-                    <select id="hour" name="hour">
-                        <!-- Horas serán insertadas aquí -->
-                    </select>
-                </div>
-                <div class="form-field-container">
-                 <label class="form-field-label" for="fullname">Nombre Completo</label>
-                 <input required="" type="text" id="fullname" name="fullname" placeholder="Ingresa tu nombre y apellido">
-                </div>
-                <div class="error-message" id="error-fullname"></div>
-                <div class="form-field-container">
-                    <label class="form-field-label" for="whatsapp"><i class="fa fa-whatsapp" style="color: #25D366;"></i> WhatsApp con código de área local</label>
-                    <input minlength="11" maxlength="13" required="" type="text" id="whatsapp" name="whatsapp" placeholder="Ingresa tu WhatsApp" value="54">
-                </div>
-            </div>
-            <div id="whatsapp-match-feedback"></div>
-            <div class="error-message" id="error-fullname-top"></div>
-            <div class="error-message" id="error-step5"></div>
-            <p class="final-message" style="font-size:14px;">Valoración: $20.000 pesos. Se requiere un pago anticipado de  $20.000 para confirmar tu cita.</p>
-             <button type="button" id="form_19_submit" class="continue-btn">CONFIRMAR CITA ➜</button>
-            <div id="whatsapp-link-container" style="display:none; margin-top: 20px;">
-                <p>¡Ya casi terminas! Haz clic en el botón de WhatsApp para confirmar tu cita:</p>
-                <a id="whatsapp-link" class="continue-btn" target="_blank" draggable="false">Enviar mensaje por WhatsApp</a>
-            </div>
-        </div>
-    </form>
-</div>
-
-<div class="overlay" aria-hidden="true"></div>
-
-<script>
-   jQuery(document).ready(function() {
-    const appScriptUrl = 'https://script.google.com/macros/s/AKfycbyha1A56RFX3WHnhE-Y-g4EsJLF9-uUUwYlYvuDaqTNSbgtOsAi3lDFatlAopsEkbce/exec';
-    let horariosDisponibles = {}; // Variable global para almacenar los horarios
-
-    // Función para obtener y procesar los horarios disponibles
-    function obtenerHorarios() {
-        fetch(appScriptUrl)
-            .then(response => response.json())
-            .then(data => {
-                horariosDisponibles = data;
-                llenarFechas();
-                // Llenar las horas para la primera fecha por defecto al cargar
-                llenarHoras(Object.keys(horariosDisponibles)[0]);
-            })
-            .catch(error => console.error('Error:', error));
-    }
-
-    // Función para llenar el select de fechas
-    function llenarFechas() {
-        const selectFecha = jQuery('#date');
-        selectFecha.empty();
-        Object.keys(horariosDisponibles).forEach(fecha => {
-            selectFecha.append(jQuery('<option>', {
-                value: fecha,
-                text: fecha
-            }));
-        });
-    }
-
-    // Función para llenar el select de horas
-    function llenarHoras(fecha) {
-        const selectHora = jQuery('#hour');
-        selectHora.empty();
-        const horas = horariosDisponibles[fecha];
-        if (horas) {
-            horas.forEach(hora => {
-                selectHora.append(jQuery('<option>', {
-                    value: hora,
-                    text: hora
-                }));
-            });
+        .continue-btn {
+            line-height: 1.5;
+            width: 90%;
+            font-size: 16px;
+            padding: 10px 20px;
+            font-weight: 600;
+            border-radius: 8px;
+            border: none;
+            background-color: #4ac959;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin: 0 auto;
         }
-    }
 
-    // Evento change en el select de fecha para actualizar las horas
-    jQuery('#date').change(function() {
-        const fechaSeleccionada = jQuery(this).val();
-        llenarHoras(fechaSeleccionada);
-    });
+        .continue-btn:hover {
+            background-color: #36a843;
+        }
 
-    // Inicializar el formulario y obtener los horarios disponibles
-    obtenerHorarios();
+        .error-message {
+            color: #dc3545;
+            margin-top: 5px;
+            font-size: 14px;
+            text-align: center; /* Centrar mensajes de error */
+        }
+
+        .step {
+            display: none;
+            padding: 20px;
+        }
+
+        .question-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        /* Radio Buttons */
+        .radio-container {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+
+        .radio-container label {
+            margin: 8px 0;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .radio-container input[type="radio"] {
+            margin-right: 10px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #4ac959;
+            border-radius: 50%;
+            outline: none;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .radio-container input[type="radio"]:checked {
+            background-color: #4ac959;
+            box-shadow: inset 0 0 0 3px white;
+        }
+
+        /* Form Fields */
+        label {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type="text"],
+        select {
+            width: 95%; /* Ajustado para responsividad */
+            max-width: 300px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .validated-whatsapp {
+            background-color: #e9f5e9;
+            padding: 2px 5px;
+            border-radius: 3px;
+            color: #28a745;
+        }
+
+        /* Step 4 Specific Styling */
+        .pricing-info {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .pricing-info p {
+            margin: 5px 0;
+            font-size: 15px !important;
+            text-align: center;
+        }
+
+        .pricing-info strong {
+            font-size: 16px;
+        }
+
+        /* WhatsApp Validation */
+        #whatsapp-match-feedback {
+            margin-bottom: 15px;
+        }
+
+        /* Final Message */
+        .final-message {
+            font-size: 14px;
+            color: #666;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .popover {
+                width: 95%;
+            }
+            .question-title {
+                font-size: 16px;
+            }
+        }
+
+        .form-field-label {
+            margin-bottom: 5px;
+        }
+
+        .form-field-container {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centrar campos */
+        }
+
+        #imc-result {
+            margin-top: 10px;
+            font-size: 17px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .select-wrapper {
+            position: relative;
+            width: 95%; /* Ajustado para responsividad */
+            max-width: 300px;
+        }
+
+        .select-wrapper select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            width: 100%;
+            background-color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px;
+        }
     
-        populateWeightSelect();
-        populateHeightSelect();
-        resetForm();
-        jQuery('#step1').show(); // Show the first step initially
-
-        jQuery('#peso, #altura').on('change', function() {
-            calculateIMC();
-            if (jQuery('#peso').val() && jQuery('#altura').val()) {
-                jQuery('#step1 .continue-btn').prop('disabled', false);
-            } else {
-                jQuery('#step1 .continue-btn').prop('disabled', true);
-            }
-        });
-
-        const diaelegido = jQuery('#date').val();
-        const horaelegida = jQuery('#hour').val();
-
-        jQuery("#date, #hour").change(function() {
-            const diaelegido = jQuery('#date').find('option:selected').text();
-            const horaelegida = jQuery('#hour').val();
-            jQuery("#lafechadecitadeseada").html(diaelegido + ' ' + horaelegida);
-            jQuery("#eldelafecha").html('el ');
-        });
-
-        jQuery("#whatsapp").click(function() {
-            $("#fechahoraopcionalfinal").show();
-        });
-
-        var numeroAleatorio = Math.floor(Math.random() * 5) + 1;
-        jQuery("#pocoscupos").text(numeroAleatorio);
-
-        //fetchAvailableAppointments(); ya no se usa, ya que se usa obtenerHorarios()
-        jQuery('#date').change(populateHourSelect);
-    });
-
-  function populateWeightSelect() {
-    const select = jQuery('#peso');
-    select.empty(); // Limpiar opciones existentes
-    select.append(jQuery('<option>', {
-        value: '',
-        text: 'Seleccione',
-        selected: true,
-        disabled: true
-    }));
-    for (let i = 40; i <= 150; i++) {
-        for (let j = 0; j < 10; j++) {
-            let weight = i + (j / 10);
-            let weightStr = weight.toFixed(1).replace('.', ',');
-            select.append(jQuery('<option>', {
-                value: weight.toFixed(1),
-                text: weightStr + ' kg'
-            }));
+        .header-container img {
+            max-width: 80px; /* Ajusta el tamaño del logo según sea necesario */
         }
-    }
-}
-
-function populateHeightSelect() {
-    const select = jQuery('#altura');
-    select.empty(); // Limpiar opciones existentes
-    select.append(jQuery('<option>', {
-        value: '',
-        text: 'Seleccione',
-        selected: true,
-        disabled: true
-    }));
-    for (let i = 140; i <= 200; i++) {
-        select.append(jQuery('<option>', {
-            value: i,
-            text: i + ' cm'
-        }));
-    }
-}
-    function calculateIMC() {
-        const peso = parseFloat(jQuery('#peso').val());
-        const altura = parseFloat(jQuery('#altura').val()) / 100; // Convertir cm a metros
-
-        if (peso && altura) {
-            const imc = (peso / (altura * altura)).toFixed(2);
-            let message = '';
-
-            if (imc <= 30) {
-                message = "Califica para una consulta de evaluación con los médicos y por su IMC para ir a cirugía inmediata.";
-            } else if (imc > 30 && imc <= 40) {
-                message = "Califica para una consulta de evaluación con los médicos y por su IMC es probable que se le recomiende plan de readecuación corporal con nuestro nutricionista de confianza para estar lista para cirugía.";
-            } else {
-                message = "No califica en esta oportunidad, no podemos ayudarla.";
-            }
-
-            jQuery('#imc-result').html(`Tu IMC es: <strong>${imc.replace('.', ',')}</strong>. ${message}`);
-        } else {
-            jQuery('#imc-result').text('');
+    
+        .header-container div {
+            font-size: 0.9em;
         }
-    }
+    </style>
+</head>
 
-    jQuery('.overlay').on('click', function() {
-        jQuery('.popover').hide();
-        jQuery('.overlay').hide();
-    });
+<body>
+    <div class="thrv_wrapper thrv_custom_html_shortcode tve-droppable" data-tve-custom-html="1">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0"></script>
 
-     jQuery('#form_19_submit').on('click', async function(event) {
-        event.preventDefault();
+        <div class="popover" aria-labelledby="popoverLabel" aria-hidden="true">
+            <div class="header-container">
+                <img src="https://www.cpcirugiaestetica.com/images/logo.png" alt="Logo">
+                <div>
+                    <span style="font-size: 1em;">📍</span> Mayor Arruabarrena 1792 - Córdoba Capital - Argentina
+                </div>
+            </div>
+            <form id="multi_step_form" style="text-align: left;font-size:14px; background-color: white;" autocomplete="new-password">
+                <p style="padding: 10px; text-align: center; background-color: lightyellow; font-size: 17px;">Averigua ahora si eres
+                    candidata a Lipoescultura</p>
+                <div class="step" id="step1">
+                    <p class="question-title">Ingresa tu peso y tu altura</p>
+                    <div class="form-field-container">
+                        <label class="form-field-label" for="peso">Peso (kg)</label>
+                        <div class="select-wrapper">
+                            <select id="peso" name="peso">
+                                <!-- Options will be added here -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-field-container">
+                        <label class="form-field-label" for="altura">Altura (cm)</label>
+                        <div class="select-wrapper">
+                            <select id="altura" name="altura">
+                                <!-- Options will be added here -->
+                            </select>
+                        </div>
+                    </div>
+                    <div id="imc-result"></div>
+                    <div class="error-message" id="error-step1"></div>
+                    <button type="button" class="continue-btn" onclick="nextStep(1)">Siguiente ➜</button>
+                </div>
 
-        // Clear previous error messages
-        jQuery('.error-message').text('');
+                <div class="step" id="step2">
+                    <p class="question-title">¿Qué tan pronto quieres reservar cirugía para tu lipoescultura?</p>
+                    <div class="radio-container">
+                        <label><input type="radio" name="urgency" value="Inmediatamente"> Inmediatamente</label>
+                        <label><input type="radio" name="urgency" value="Dentro de los próximos 3-6 meses"> Dentro de los
+                            próximos 3-6 meses</label>
+                        <label><input type="radio" name="urgency" value="Todavía estoy haciendo mi investigación"> Todavía
+                            estoy haciendo mi investigación</label>
+                    </div>
+                    <div class="error-message" id="error-step2"></div>
+                    <button type="button" class="continue-btn" onclick="nextStep(2)">Siguiente ➜</button>
+                </div>
 
-        let hasError = false;
+                <div class="step" id="step3">
+                    <div class="pricing-info">
+                        <p class="question-title">Precios Base:</p>
+                        <p><strong>Consulta:</strong> $20.000 pesos (pago anticipado obligatorio)</p>
+                        <p><strong>Liposucción Vaser:</strong> Elimina grasa localizada utilizando ultrasonido, ideal
+                            para definir y contornear. Desde 2500 USD, aproximadamente $2.775.000 pesos.</p>
+                        <p><strong>Lipoabdominoplastía:</strong> Combina liposucción con eliminación de piel sobrante en
+                            el abdomen. Desde 3000 USD, aproximadamente $3.330.000 pesos.</p>
+                        <p><strong>Renuvion:</strong> Tecnología para tensar la piel después de la liposucción. Desde
+                            1500 USD adicionales, aproximadamente $1.665.000 pesos.</p>
+                        <p><strong>Aumento mamario:</strong> Implantes mamarios para aumentar el volumen del busto.
+                            Desde 3700 USD, aproximadamente $4.107.000 pesos.</p>
+                        <p><strong>Otros procedimientos:</strong> Te invitamos a una consulta para evaluar opciones
+                            personalizadas.</p>
+                        <p class="question-title" style="margin-top: 15px;">Presupuesto:</p>
+                        <p>Considerando los precios de referencia, ¿cuentas con el presupuesto para el tratamiento de
+                            lipoescultura?</p>
+                    </div>
+                    <div class="radio-container">
+                        <label><input type="radio" name="precio" value="Sí, cuento con el presupuesto"> Sí, cuento con
+                            el presupuesto</label>
+                        <label><input type="radio" name="precio" value="No cuento con el presupuesto"> No cuento con el
+                            presupuesto</label>
+                    </div>
+                    <div class="error-message" id="error-step3"></div>
+                    <button type="button" class="continue-btn" onclick="nextStep(3)">Siguiente ➜</button>
+                </div>
 
-        // Validate full name
-        if (!validateFullName()) {
-            hasError = true;
-        }
+                <div class="step" id="step4">
+                    <p class="question-title">Estamos ubicados en Mayor Mario Efrain Arruabarrena 1792, X5000 Córdoba.
+                        ¿Puedes asistir sin problema a tu valoración?</p>
+                    <div class="radio-container">
+                        <label><input type="radio" name="barrier" value="Si">Si</label>
+                        <label><input type="radio" name="barrier" value="No sé aún"> No sé aún</label>
+                    </div>
+                    <div class="error-message" id="error-step4"></div>
+                    <button type="button" class="continue-btn" onclick="nextStep(4)">Ver formulario de cita ➜</button>
+                </div>
 
-        // Validate WhatsApp number
-        const whatsapp = jQuery('#whatsapp').val().replace(/[\s()-]/g, "");
+                <div class="step" id="step5">
+                    <p style="background-color: #e9f5e9; margin-bottom: 5px; padding: 10px; font-size: 16px; border-radius: 8px;">¡Eres
+                        una potencial candidata a Lipoescultura! Si quieres agendar tu cita de valoración, selecciona
+                        debajo la fecha y hora deseada.</p>
 
-        if (whatsapp.length > 13 || isNaN(whatsapp)) {
-            jQuery('#error-step5').text('Por favor, ingresa un número de WhatsApp válido. Revisa que no te falte ningún número.');
-            hasError = true;
-        }
+                    <div id="restoformdatospersonales">
+                        <div class="form-field-container">
+                            <label class="form-field-label" for="date">Fecha deseada de tu cita</label>
+                            <select id="date" name="date">
+                                <!-- Fechas serán insertadas aquí -->
+                            </select>
+                        </div>
+                        <div class="form-field-container">
+                            <label class="form-field-label" for="hour">Hora deseada de tu cita</label>
+                            <select id="hour" name="hour">
+                                <!-- Horas serán insertadas aquí -->
+                            </select>
+                        </div>
+                        <div class="form-field-container">
+                            <label class="form-field-label" for="fullname">Nombre Completo</label>
+                            <input required="" type="text" id="fullname" name="fullname"
+                                placeholder="Ingresa tu nombre y apellido">
+                        </div>
+                        <div class="error-message" id="error-fullname"></div>
+                        <div class="form-field-container">
+                            <label class="form-field-label" for="whatsapp"><i class="fa fa-whatsapp"
+                                    style="color: #25D366;"></i> WhatsApp con código de área local</label>
+                            <input minlength="11" maxlength="13" required="" type="text" id="whatsapp" name="whatsapp"
+                                placeholder="Ingresa tu WhatsApp" value="54">
+                        </div>
+                    </div>
+                    <div id="whatsapp-match-feedback"></div>
+                    <div class="error-message" id="error-fullname-top"></div>
+                    <div class="error-message" id="error-step5"></div>
+                    <p class="final-message" style="font-size:14px;">Valoración: $20.000 pesos. Se requiere un pago
+                        anticipado de $20.000 para confirmar tu cita.</p>
+                    <button type="button" id="form_19_submit" class="continue-btn">CONFIRMAR CITA ➜</button>
+                    <div id="whatsapp-link-container" style="display:none; margin-top: 20px;">
+                        <p>¡Ya casi terminas! Haz clic en el botón de WhatsApp para confirmar tu cita:</p>
+                        <a id="whatsapp-link" class="continue-btn" target="_blank" draggable="false">Enviar mensaje por
+                            WhatsApp</a>
+                    </div>
+                </div>
+            </form>
+        </div>
 
-        if (!validateFullName()) {
-            return;
-        }
+        <div class="overlay" aria-hidden="true"></div>
 
-        // Validate date and time selection (opcional)
-        const fechaSeleccionada = jQuery('#date option:selected').text();
-        const horaSeleccionada = jQuery('#hour option:selected').text();
+        <script>
+            jQuery(document).ready(function () {
+                const appScriptUrl = 'https://script.google.com/macros/s/AKfycbyha1A56RFX3WHnhE-Y-g4EsJLF9-uUUwYlYvuDaqTNSbgtOsAi3lDFatlAopsEkbce/exec';
+                let horariosDisponibles = {}; // Variable global para almacenar los horarios
 
-        if (hasError) {
-            // Scroll to the first error message
-            jQuery('html, body').animate({
-                scrollTop: jQuery('.error-message').filter(function() {
-                    return jQuery(this).text() !== '';
-                }).first().offset().top - 100
-            }, 500);
-            return;
-        }
-
-        const nombre = jQuery('#fullname').val().trim();
-        const tratamientoInteres = 'Lipoescultura'; // Valor por defecto
-        let currentUrl = window.location.href;
-
-        let landingUrl = currentUrl;
-
-        if (fechaSeleccionada) {
-            jQuery('#error-step5').text('');
-            jQuery('#form_19_submit').text('Espere...').prop('disabled', true);
-            try {
-                const urgency = jQuery('input[name="urgency"]:checked').val();
-                const precio = jQuery('input[name="precio"]:checked').val();
-                const barrier = jQuery('input[name="barrier"]:checked').val();
-                const peso = jQuery('#peso').val().replace('.',',');
-                const altura = jQuery('#altura').val();
-                const questionnaire = `URGENCY:${encodeURIComponent(urgency)} PRECIO:${encodeURIComponent(precio)} BARRIER:${encodeURIComponent(barrier)} PESO: ${encodeURIComponent(peso)} ALTURA: ${encodeURIComponent(altura)}`;
-
-                landingUrl = currentUrl + " " + questionnaire;
-
-                console.log('Datos a enviar:', {
-                    "fullname": nombre,
-                    "whatsapp": whatsapp,
-                    "tratamiento_interes": tratamientoInteres,
-                    "fecha_cita": fechaSeleccionada + ' ' + horaSeleccionada,
-                    "landingUrl": landingUrl,
-                    "estado": "NUEVO"
-                });
-
-                const response = await jQuery.ajax({
-                    url: "https://script.google.com/macros/s/AKfycbyykf2P-x8r9UPF6t4N7IbdvBR76D-xXk2w6K_t56r-fE_zO5t6PZ34c-Jk1wU-qH1h4Q/exec",
-                    data: {
-                        "fullname": nombre,
-                        "whatsapp": whatsapp,
-                        "tratamiento_interes": tratamientoInteres,
-                        "fecha_cita": fechaSeleccionada + ' ' + horaSeleccionada,
-                        "landingUrl": landingUrl,
-                        "estado": "NUEVO"
-                    },
-                    type: "POST",
-                });
-
-                // Generar el mensaje de WhatsApp
-                const whatsappNumber = '5492612186355';
-                const mensajeWhatsapp = `Hola ya envié mi pedido de cita para Lipoescultura. Mi nombre es: ${nombre} y la cita la solicité para: ${fechaSeleccionada} ${horaSeleccionada}`;
-                const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensajeWhatsapp)}`;
-
-                // Disparar evento Schedule de Facebook si el presupuesto es sí y puede asistir
-                if (precio === "Sí, cuento con el presupuesto" && urgency === "Inmediatamente" && barrier === "Si") {
-                    fbq('track', 'Schedule');
+                // Función para obtener y procesar los horarios disponibles
+                function obtenerHorarios() {
+                    fetch(appScriptUrl)
+                        .then(response => response.json())
+                        .then(data => {
+                            horariosDisponibles = data;
+                            llenarFechas();
+                            // Llenar las horas para la primera fecha por defecto al cargar
+                            llenarHoras(Object.keys(horariosDisponibles)[0]);
+                        })
+                        .catch(error => console.error('Error:', error));
                 }
-                fbq('track', 'Lead');
 
-                // Redirigir a WhatsApp después de 2 segundos
-                jQuery('#whatsapp-link').attr('href', whatsappLink);
-                jQuery('#whatsapp-link-container').show();
-                jQuery('#form_19_submit').hide();
-                setTimeout(function() {
-                    window.location.href = whatsappLink;
-                }, 2000);
-                jQuery('#multi_step_form')[0].reset();
-            } catch (error) {
-                console.error('Error en la petición AJAX:', error); // Imprime el error en la consola
-                jQuery('#error-step5').text('Error enviando datos. Por favor intenta nuevamente.');
-                jQuery('#form_19_submit').text('CONFIRMAR CITA ➜').prop('disabled', false);
-            }
-        } else {
-            jQuery('#error-step5').text('Por favor, ingrese una fecha y una hora deseada para la cita antes de continuar.');
-        }
-    });
+                // Función para llenar el select de fechas
+                function llenarFechas() {
+                    const selectFecha = jQuery('#date');
+                    selectFecha.empty();
+                    Object.keys(horariosDisponibles).forEach(fecha => {
+                        selectFecha.append(jQuery('<option>', {
+                            value: fecha,
+                            text: fecha
+                        }));
+                    });
+                }
 
-    function resetForm() {
-        jQuery('#multi_step_form')[0].reset();
-        jQuery('#error-step5').text('');
-        jQuery('#form_19_submit').prop('disabled', false);
-        jQuery('#imc-result').text('');
-    }
+                // Función para llenar el select de horas
+                function llenarHoras(fecha) {
+                    const selectHora = jQuery('#hour');
+                    selectHora.empty();
+                    const horas = horariosDisponibles[fecha];
+                    if (horas) {
+                        horas.forEach(hora => {
+                            selectHora.append(jQuery('<option>', {
+                                value: hora,
+                                text: hora
+                            }));
+                        });
+                    }
+                }
 
-    jQuery(document).ready(function(){
-        jQuery('#fullname').on('input', function(){
-            var fullname = jQuery(this).val().trim();
-            var names = fullname.split(' ');
-            var firstName = names[0];
-            var lastName = names.slice(1).join(' ');
-            jQuery('#first_name').val(firstName);
-            jQuery('#last_name').val(lastName);
-        });
-    });
+                // Evento change en el select de fecha para actualizar las horas
+                jQuery('#date').change(function () {
+                    const fechaSeleccionada = jQuery(this).val();
+                    llenarHoras(fechaSeleccionada);
+                });
 
-    /* ya no se usa ya que lo reemplace por obtenerHorarios()
-    function fetchAvailableAppointments() {
-        jQuery.ajax({
-            url: 'https://script.google.com/macros/s/AKfycbyykf2P-x8r9UPF6t4N7IbdvBR76D-xXk2w6K_t56r-fE_zO5t6PZ34c-Jk1wU-qH1h4Q/exec',
-            type: 'GET',
-            dataType: 'json',
-            success: function(data) {
-                availableAppointments = data;
-                populateDateSelect();
-            },
-            error: function(error) {
-                console.error('Error fetching appointments:', error);
-            }
-        });
-    }
+                // Inicializar el formulario y obtener los horarios disponibles
+                obtenerHorarios();
 
-    function populateDateSelect() {
-        const dateSelect = jQuery('#date');
-        dateSelect.empty();
-        let dates = {};
+                populateWeightSelect();
+                populateHeightSelect();
+                resetForm();
+                jQuery('#step1').show(); // Show the first step initially
 
-        availableAppointments.forEach(appointment => {
-            if (!dates[appointment.date]) {
-                dates[appointment.date] = true;
-                dateSelect.append(jQuery('<option>', {
-                    value: appointment.date,
-                    text: appointment.date
+                jQuery('#peso, #altura').on('change', function () {
+                    calculateIMC();
+                    if (jQuery('#peso').val() && jQuery('#altura').val()) {
+                        jQuery('#step1 .continue-btn').prop('disabled', false);
+                    } else {
+                        jQuery('#step1 .continue-btn').prop('disabled', true);
+                    }
+                });
+
+                const diaelegido = jQuery('#date').val();
+                const horaelegida = jQuery('#hour').val();
+
+                jQuery("#date, #hour").change(function () {
+                    const diaelegido = jQuery('#date').find('option:selected').text();
+                    const horaelegida = jQuery('#hour').val();
+                    jQuery("#lafechadecitadeseada").html(diaelegido + ' ' + horaelegida);
+                    jQuery("#eldelafecha").html('el ');
+                });
+
+                jQuery("#whatsapp").click(function () {
+                    $("#fechahoraopcionalfinal").show();
+                });
+
+                var numeroAleatorio = Math.floor(Math.random() * 5) + 1;
+                jQuery("#pocoscupos").text(numeroAleatorio);
+
+                //fetchAvailableAppointments(); ya no se usa, ya que se usa obtenerHorarios()
+                jQuery('#date').change(populateHourSelect);
+            });
+
+            function populateWeightSelect() {
+                const select = jQuery('#peso');
+                select.empty(); // Limpiar opciones existentes
+                select.append(jQuery('<option>', {
+                    value: '',
+                    text: 'Seleccione',
+                    selected: true,
+                    disabled: true
                 }));
+                for (let i = 40; i <= 150; i++) {
+                    for (let j = 0; j < 10; j++) {
+                        let weight = i + (j / 10);
+                        let weightStr = weight.toFixed(1).replace('.', ',');
+                        select.append(jQuery('<option>', {
+                            value: weight.toFixed(1),
+                            text: weightStr + ' kg'
+                        }));
+                    }
+                }
             }
-        });
 
-        populateHourSelect();
-    }
-
-    function populateHourSelect() {
-        const selectedDate = jQuery('#date').val();
-        const hourSelect = jQuery('#hour');
-        hourSelect.empty();
-
-        const appointmentsForDate = availableAppointments.filter(appointment => appointment.date === selectedDate);
-        appointmentsForDate.forEach(appointment => {
-            hourSelect.append(jQuery('<option>', {
-                value: appointment.time,
-                text: appointment.time
-            }));
-        });
-    }
-*/
-    jQuery(document).ready(function() {
-        const whatsappInput = jQuery('#whatsapp');
-        const whatsappFeedback = jQuery('<div id="whatsapp-feedback"></div>');
-        const checkboxContainer = jQuery('.checkbox-container');
-        whatsappInput.after(whatsappFeedback);
-
-        whatsappInput.on('input', function() {
-            this.value = this.value.replace(/[^0-9]/g, '');
-        });
-
-        // Agregar un texto explicativo
-        whatsappInput.before('<p style="font-size: 12px; color: #666;">Ingrese su WhatsApp completo, incluyendo el código de área. Es crucial para confirmar su cita.</p>');
-
-        const fullNameInput = jQuery('#fullname');
-        const fullNameFeedback = jQuery('<div id="fullname-feedback"></div>');
-        const errorFullName = jQuery('#error-fullname');
-        const errorFullNameTop = jQuery('#error-fullname-top');
-
-        fullNameInput.on('input', validateFullName);
-    });
-
-    function validateFullName() {
-        const fullNameInput = jQuery('#fullname');
-        const errorFullName = jQuery('#error-fullname');
-        const errorFullNameTop = jQuery('#error-fullname-top');
-        const fullName = fullNameInput.val().trim();
-        if (fullName === '') {
-            errorFullName.text('Por favor, ingresa tu nombre completo.');
-            errorFullNameTop.text('Por favor, ingresa tu nombre completo.');
-            fullNameInput.css('border-color', 'red');
-            return false;
-        } else {
-            errorFullName.text('');
-            errorFullNameTop.text('');
-            fullNameInput.css('border-color', 'green');
-            return true;
-        }
-    }
-
-    //jQuery('.continue-btn').prop('disabled', true);
-
-    jQuery('input[type="radio"]').on('change', function() {
-        const stepNumber = jQuery(this).closest('.step').attr('id').replace('step', '');
-        jQuery(`#step${stepNumber} .continue-btn`).prop('disabled', false);
-    });
-
-    function nextStep(currentStep) {
-        const nextStepId = currentStep + 1;
-        const currentStepElement = jQuery(`#step${currentStep}`);
-        const nextStepElement = jQuery(`#step${nextStepId}`);
-        const errorElement = jQuery(`#error-step${currentStep}`);
-
-        // Check if a radio button is selected or inputs are filled
-        if (currentStep === 1) {
-            if (!jQuery('#peso').val() || !jQuery('#altura').val()) {
-                errorElement.text('Por favor, completa todos los campos.');
-                errorElement.show();
-                return;
+            function populateHeightSelect() {
+                const select = jQuery('#altura');
+                select.empty(); // Limpiar opciones existentes
+                select.append(jQuery('<option>', {
+                    value: '',
+                    text: 'Seleccione',
+                    selected: true,
+                    disabled: true
+                }));
+                for (let i = 140; i <= 200; i++) {
+                    select.append(jQuery('<option>', {
+                        value: i,
+                        text: i + ' cm'
+                    }));
+                }
             }
-        } else {
-            if (currentStepElement.find('input[type="radio"]:checked').length === 0) {
-                errorElement.text('Por favor, selecciona una opción antes de continuar.');
-                errorElement.show();
-                return;
+            function calculateIMC() {
+                const peso = parseFloat(jQuery('#peso').val());
+                const altura = parseFloat(jQuery('#altura').val()) / 100; // Convertir cm a metros
+
+                if (peso && altura) {
+                    const imc = (peso / (altura * altura)).toFixed(2);
+                    let message = '';
+
+                    if (imc <= 30) {
+                        message = "Califica para una consulta de evaluación con los médicos y por su IMC para ir a cirugía inmediata.";
+                    } else if (imc > 30 && imc <= 40) {
+                        message = "Califica para una consulta de evaluación con los médicos y por su IMC es probable que se le recomiende plan de readecuación corporal con nuestro nutricionista de confianza para estar lista para cirugía.";
+                    } else {
+                        message = "No califica en esta oportunidad, no podemos ayudarla.";
+                    }
+
+                    jQuery('#imc-result').html(`Tu IMC es: <strong>${imc.replace('.', ',')}</strong>. ${message}`);
+                } else {
+                    jQuery('#imc-result').text('');
+                }
             }
-        }
 
-        // Hide error message if a selection is made
-        errorElement.hide();
+            jQuery('.overlay').on('click', function () {
+                jQuery('.popover').hide();
+                jQuery('.overlay').hide();
+            });
 
-        // Hide current step and show next step
-        currentStepElement.hide();
-        nextStepElement.show();
-		window.scrollTo(0, 0);
+            jQuery('#form_19_submit').on('click', async function (event) {
+                event.preventDefault();
 
-        // Disable the next step's button until a selection is made
-      //  nextStepElement.find('.continue-btn').prop('disabled', true);
-    }
-</script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
-</div>
+                // Clear previous error messages
+                jQuery('.error-message').text('');
+
+                let hasError = false;
+
+                // Validate full name
+                if (!validateFullName()) {
+                    hasError = true;
+                }
+
+                // Validate WhatsApp number
+                const whatsapp = jQuery('#whatsapp').val().replace(/[\s()-]/g, "");
+
+                if (whatsapp.length > 13 || isNaN(whatsapp)) {
+                    jQuery('#error-step5').text('Por favor, ingresa un número de WhatsApp válido. Revisa que no te falte ningún número.');
+                    hasError = true;
+                }
+
+                if (!validateFullName()) {
+                    return;
+                }
+
+                // Validate date and time selection (opcional)
+                const fechaSeleccionada = jQuery('#date option:selected').text();
+                const horaSeleccionada = jQuery('#hour option:selected').text();
+
+                if (hasError) {
+                    // Scroll to the first error message
+                    jQuery('html, body').animate({
+                        scrollTop: jQuery('.error-message').filter(function () {
+                            return jQuery(this).text() !== '';
+                        }).first().offset().top - 100
+                    }, 500);
+                    return;
+                }
+
+                const nombre = jQuery('#fullname').val().trim();
+                const tratamientoInteres = 'Lipoescultura'; // Valor por defecto
+                let currentUrl = window.location.href;
+
+                let landingUrl = currentUrl;
+
+                if (fechaSeleccionada) {
+                    jQuery('#error-step5').text('');
+                    jQuery('#form_19_submit').text('Espere...').prop('disabled', true);
+                    try {
+                        const urgency = jQuery('input[name="urgency"]:checked').val();
+                        const precio = jQuery('input[name="precio"]:checked').val();
+                        const barrier = jQuery('input[name="barrier"]:checked').val();
+                        const peso = jQuery('#peso').val().replace('.', ',');
+                        const altura = jQuery('#altura').val();
+                        const questionnaire = `URGENCY:${encodeURIComponent(urgency)} PRECIO:${encodeURIComponent(precio)} BARRIER:${encodeURIComponent(barrier)} PESO: ${encodeURIComponent(peso)} ALTURA: ${encodeURIComponent(altura)}`;
+
+                        landingUrl = currentUrl + " " + questionnaire;
+
+                        console.log('Datos a enviar:', {
+                            "fullname": nombre,
+                            "whatsapp": whatsapp,
+                            "tratamiento_interes": tratamientoInteres,
+                            "fecha_cita": fechaSeleccionada + ' ' + horaSeleccionada,
+                            "landingUrl": landingUrl,
+                            "estado": "NUEVO"
+                        });
+
+                        const response = await jQuery.ajax({
+                            url: "https://script.google.com/macros/s/AKfycbyykf2P-x8r9UPF6t4N7IbdvBR76D-xXk2w6K_t56r-fE_zO5t6PZ34c-Jk1wU-qH1h4Q/exec",
+                            data: {
+                                "fullname": nombre,
+                                "whatsapp": whatsapp,
+                                "tratamiento_interes": tratamientoInteres,
+                                "fecha_cita": fechaSeleccionada + ' ' + horaSeleccionada,
+                                "landingUrl": landingUrl,
+                                "estado": "NUEVO"
+                            },
+                            type: "POST",
+                        });
+
+                        // Generar el mensaje de WhatsApp
+                        const whatsappNumber = '5492612186355';
+                        const mensajeWhatsapp = `Hola ya envié mi pedido de cita para Lipoescultura. Mi nombre es: ${nombre} y la cita la solicité para: ${fechaSeleccionada} ${horaSeleccionada}`;
+                        const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensajeWhatsapp)}`;
+
+                        // Disparar evento Schedule de Facebook si el presupuesto es sí y puede asistir
+                        if (precio === "Sí, cuento con el presupuesto" && urgency === "Inmediatamente" && barrier === "Si") {
+                            fbq('track', 'Schedule');
+                        }
+                        fbq('track', 'Lead');
+
+                        // Redirigir a WhatsApp después de 2 segundos
+                        jQuery('#whatsapp-link').attr('href', whatsappLink);
+                        jQuery('#whatsapp-link-container').show();
+                        jQuery('#form_19_submit').hide();
+                        setTimeout(function () {
+                            window.location.href = whatsappLink;
+                        }, 2000);
+                        jQuery('#multi_step_form')[0].reset();
+                    } catch (error) {
+                        console.error('Error en la petición AJAX:', error); // Imprime el error en la consola
+                        jQuery('#error-step5').text('Error enviando datos. Por favor intenta nuevamente.');
+                        jQuery('#form_19_submit').text('CONFIRMAR CITA ➜').prop('disabled', false);
+                    }
+                } else {
+                    jQuery('#error-step5').text('Por favor, ingrese una fecha y una hora deseada para la cita antes de continuar.');
+                }
+            });
+
+            function resetForm() {
+                jQuery('#multi_step_form')[0].reset();
+                jQuery('#error-step5').text('');
+                jQuery('#form_19_submit').prop('disabled', false);
+                jQuery('#imc-result').text('');
+            }
+
+            jQuery(document).ready(function () {
+                jQuery('#fullname').on('input', function () {
+                    var fullname = jQuery(this).val().trim();
+                    var names = fullname.split(' ');
+                    var firstName = names[0];
+                    var lastName = names.slice(1).join(' ');
+                    jQuery('#first_name').val(firstName);
+                    jQuery('#last_name').val(lastName);
+                });
+            });
+
+            jQuery(document).ready(function () {
+                const whatsappInput = jQuery('#whatsapp');
+                const whatsappFeedback = jQuery('<div id="whatsapp-feedback"></div>');
+                const checkboxContainer = jQuery('.checkbox-container');
+                whatsappInput.after(whatsappFeedback);
+
+                whatsappInput.on('input', function () {
+                    this.value = this.value.replace(/[^0-9]/g, '');
+                });
+
+                // Agregar un texto explicativo
+                whatsappInput.before('<p style="font-size: 12px; color: #666;">Ingrese su WhatsApp completo, incluyendo el código de área. Es crucial para confirmar su cita.</p>');
+
+                const fullNameInput = jQuery('#fullname');
+                const fullNameFeedback = jQuery('<div id="fullname-feedback"></div>');
+                const errorFullName = jQuery('#error-fullname');
+                const errorFullNameTop = jQuery('#error-fullname-top');
+
+                fullNameInput.on('input', validateFullName);
+            });
+
+            function validateFullName() {
+                const fullNameInput = jQuery('#fullname');
+                const errorFullName = jQuery('#error-fullname');
+                const errorFullNameTop = jQuery('#error-fullname-top');
+                const fullName = fullNameInput.val().trim();
+                if (fullName === '') {
+                    errorFullName.text('Por favor, ingresa tu nombre completo.');
+                    errorFullNameTop.text('Por favor, ingresa tu nombre completo.');
+                    fullNameInput.css('border-color', 'red');
+                    return false;
+                } else {
+                    errorFullName.text('');
+                    errorFullNameTop.text('');
+                    fullNameInput.css('border-color', 'green');
+                    return true;
+                }
+            }
+
+            jQuery('input[type="radio"]').on('change', function () {
+                const stepNumber = jQuery(this).closest('.step').attr('id').replace('step', '');
+                jQuery(`#step${stepNumber} .continue-btn`).prop('disabled', false);
+            });
+
+            function nextStep(currentStep) {
+                const nextStepId = currentStep + 1;
+                const currentStepElement = jQuery(`#step${currentStep}`);
+                const nextStepElement = jQuery(`#step${nextStepId}`);
+                const errorElement = jQuery(`#error-step${currentStep}`);
+
+                // Check if a radio button is selected or inputs are filled
+                if (currentStep === 1) {
+                    if (!jQuery('#peso').val() || !jQuery('#altura').val()) {
+                        errorElement.text('Por favor, completa todos los campos.');
+                        errorElement.show();
+                        return;
+                    }
+                } else {
+                    if (currentStepElement.find('input[type="radio"]:checked').length === 0) {
+                        errorElement.text('Por favor, selecciona una opción antes de continuar.');
+                        errorElement.show();
+                        return;
+                    }
+                }
+
+                // Hide error message if a selection is made
+                errorElement.hide();
+
+                // Hide current step and show next step
+                currentStepElement.hide();
+                nextStepElement.show();
+                window.scrollTo(0, 0);
+            }
+        </script>
+    </div>
 </body>
 
 </html>
