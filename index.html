@@ -12,14 +12,19 @@
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
             color: #333;
-            margin: 0; /* Importante para evitar márgenes por defecto */
-            padding: 0; /* Importante para evitar paddings por defecto */
+            margin: 0;
+            /* Importante para evitar márgenes por defecto */
+            padding: 0;
+            /* Importante para evitar paddings por defecto */
         }
 
         .popover {
-            width: 95%; /* Ajustado para mejor responsividad */
-            max-width: 500px; /* Ancho máximo en pantallas grandes */
-            margin: 10px auto; /* Centrado */
+            width: 95%;
+            /* Ajustado para mejor responsividad */
+            max-width: 500px;
+            /* Ancho máximo en pantallas grandes */
+            margin: 10px auto;
+            /* Centrado */
             border: none;
             overflow: hidden;
         }
@@ -48,7 +53,8 @@
             color: #dc3545;
             margin-top: 5px;
             font-size: 14px;
-            text-align: center; /* Centrar mensajes de error */
+            text-align: center;
+            /* Centrar mensajes de error */
         }
 
         .step {
@@ -106,7 +112,8 @@
 
         input[type="text"],
         select {
-            width: 95%; /* Ajustado para responsividad */
+            width: 95%;
+            /* Ajustado para responsividad */
             max-width: 300px;
             border: 1px solid #ced4da;
             border-radius: 6px;
@@ -159,6 +166,7 @@
             .popover {
                 width: 95%;
             }
+
             .question-title {
                 font-size: 16px;
             }
@@ -172,7 +180,8 @@
             margin-bottom: 15px;
             display: flex;
             flex-direction: column;
-            align-items: normal; /* Centrar campos */
+            align-items: normal;
+            /* Centrar campos */
         }
 
         #imc-result {
@@ -184,7 +193,8 @@
 
         .select-wrapper {
             position: relative;
-            width: 95%; /* Ajustado para responsividad */
+            width: 95%;
+            /* Ajustado para responsividad */
             max-width: 300px;
         }
 
@@ -200,20 +210,22 @@
             cursor: pointer;
             font-size: 14px;
         }
+
         .header-container {
             display: flex;
             justify-content: space-around;
             align-items: center;
             padding: 10px;
         }
-    
+
         .header-container img {
-            max-width: 100px; /* Ajusta el tamaño del logo según sea necesario */
+            max-width: 100px;
+            /* Ajusta el tamaño del logo según sea necesario */
         }
-    
+
         .header-container div {
             font-size: 0.9em;
-            margin-left:25px;
+            margin-left: 25px;
         }
     </style>
 </head>
@@ -229,8 +241,10 @@
                     <span style="font-size: 1em;">📍</span> Mayor Arruabarrena 1792 - Córdoba Capital - Argentina
                 </div>
             </div>
-            <form id="multi_step_form" style="text-align: left;font-size:14px; background-color: white;" autocomplete="new-password">
-                <p style="padding: 10px; text-align: center; background-color: lightyellow; font-size: 17px;">Averigua ahora si eres
+            <form id="multi_step_form" style="text-align: left;font-size:14px; background-color: white;"
+                autocomplete="new-password">
+                <p style="padding: 10px; text-align: center; background-color: lightyellow; font-size: 17px;">
+                    Averigua ahora si eres
                     candidata a Lipoescultura</p>
                 <div class="step" id="step1">
                     <p class="question-title">Ingresa tu peso y tu altura</p>
@@ -254,21 +268,46 @@
                     <div class="error-message" id="error-step1"></div>
                     <button type="button" class="continue-btn" onclick="nextStep(1)">Siguiente ➜</button>
                 </div>
-
+                <!-- Step 2: Urgencia -->
                 <div class="step" id="step2">
-                    <p class="question-title">¿Qué tan pronto quieres reservar cirugía para tu lipoescultura?</p>
+                    <p class="question-title">¿Cuándo quieres reservar cirugía?</p>
                     <div class="radio-container">
-                        <label><input type="radio" name="urgency" value="Inmediatamente"> Inmediatamente</label>
-                        <label><input type="radio" name="urgency" value="Dentro de los próximos 3-6 meses"> Dentro de los
-                            próximos 3-6 meses</label>
-                        <label><input type="radio" name="urgency" value="Todavía estoy haciendo mi investigación"> Todavía
-                            estoy haciendo mi investigación</label>
+                        <label><input type="radio" name="urgency" value="Lo más pronto posible"> Lo más pronto
+                            posible</label>
+                        <label><input type="radio" name="urgency" value="En 1 mes"> En 1 mes</label>
+                        <label><input type="radio" name="urgency" value="En 2 meses"> En 2 meses</label>
+                        <label><input type="radio" name="urgency" value="En 3 meses"> En 3 meses</label>
+                        <label><input type="radio" name="urgency" value="No lo sé aún"> No lo sé aún</label>
+                        <label><input type="radio" name="urgency" value="No quiero operarme"> No quiero operarme</label>
                     </div>
                     <div class="error-message" id="error-step2"></div>
                     <button type="button" class="continue-btn" onclick="nextStep(2)">Siguiente ➜</button>
                 </div>
-
+                <!-- Step 3: Fumar -->
                 <div class="step" id="step3">
+                    <p class="question-title">¿Fumas?</p>
+                    <div class="radio-container">
+                        <label><input type="radio" name="fuma" value="Sí"> Sí</label>
+                        <label><input type="radio" name="fuma" value="No"> No</label>
+                    </div>
+                    <div class="error-message" id="error-step3"></div>
+                    <button type="button" class="continue-btn" onclick="nextStep(3)">Siguiente ➜</button>
+                </div>
+
+                <!-- Step 4: Enfermedades Preexistentes -->
+                <div class="step" id="step4">
+                    <p class="question-title">¿Tienes alguna enfermedad o condición preexistente? (Ejemplo: diabetes,
+                        anemia, etc.)</p>
+                    <div class="form-field-container">
+                        <input type="text" id="enfermedad" name="enfermedad"
+                            placeholder="Escribe aquí si tienes alguna condición">
+                    </div>
+                    <div class="error-message" id="error-step4"></div>
+                    <button type="button" class="continue-btn" onclick="nextStep(4)">Siguiente ➜</button>
+                </div>
+
+                <!-- Step 5: Presupuesto -->
+                <div class="step" id="step5">
                     <div class="pricing-info">
                         <p class="question-title">Precios Base:</p>
                         <p><strong>Consulta:</strong> $20.000 pesos (pago anticipado obligatorio)</p>
@@ -292,23 +331,26 @@
                         <label><input type="radio" name="precio" value="No cuento con el presupuesto"> No cuento con el
                             presupuesto</label>
                     </div>
-                    <div class="error-message" id="error-step3"></div>
-                    <button type="button" class="continue-btn" onclick="nextStep(3)">Siguiente ➜</button>
+                    <div class="error-message" id="error-step5"></div>
+                    <button type="button" class="continue-btn" onclick="nextStep(5)">Siguiente ➜</button>
                 </div>
 
-                <div class="step" id="step4">
+                <!-- Step 6: Ubicación -->
+                <div class="step" id="step6">
                     <p class="question-title">Estamos ubicados en Mayor Mario Efrain Arruabarrena 1792, X5000 Córdoba.
                         ¿Puedes asistir sin problema a tu valoración?</p>
                     <div class="radio-container">
                         <label><input type="radio" name="barrier" value="Si">Si</label>
                         <label><input type="radio" name="barrier" value="No sé aún"> No sé aún</label>
                     </div>
-                    <div class="error-message" id="error-step4"></div>
-                    <button type="button" class="continue-btn" onclick="nextStep(4)">Ver formulario de cita ➜</button>
+                    <div class="error-message" id="error-step6"></div>
+                    <button type="button" class="continue-btn" onclick="nextStep(6)">Ver formulario de cita ➜</button>
                 </div>
 
-                <div class="step" id="step5">
-                    <p style="background-color: #e9f5e9; margin-bottom: 5px; padding: 10px; font-size: 16px; border-radius: 8px;">¡Eres
+                <!-- Step 7: Formulario de Cita -->
+                <div class="step" id="step7">
+                    <p style="background-color: #e9f5e9; margin-bottom: 5px; padding: 10px; font-size: 16px; border-radius: 8px;">
+                        ¡Eres
                         una potencial candidata a Lipoescultura! Si quieres agendar tu cita de valoración, selecciona
                         debajo la fecha y hora deseada.</p>
 
@@ -340,7 +382,7 @@
                     </div>
                     <div id="whatsapp-match-feedback"></div>
                     <div class="error-message" id="error-fullname-top"></div>
-                    <div class="error-message" id="error-step5"></div>
+                    <div class="error-message" id="error-step7"></div>
                     <p class="final-message" style="font-size:14px;">Valoración: $20.000 pesos. Se requiere un pago
                         anticipado de $20.000 para confirmar tu cita.</p>
                     <button type="button" id="form_19_submit" class="continue-btn">CONFIRMAR CITA ➜</button>
@@ -525,7 +567,7 @@
                 const whatsapp = jQuery('#whatsapp').val().replace(/[\s()-]/g, "");
 
                 if (whatsapp.length > 13 || isNaN(whatsapp)) {
-                    jQuery('#error-step5').text('Por favor, ingresa un número de WhatsApp válido. Revisa que no te falte ningún número.');
+                    jQuery('#error-step7').text('Por favor, ingresa un número de WhatsApp válido. Revisa que no te falte ningún número.');
                     hasError = true;
                 }
 
@@ -554,15 +596,17 @@
                 let landingUrl = currentUrl;
 
                 if (fechaSeleccionada) {
-                    jQuery('#error-step5').text('');
+                    jQuery('#error-step7').text('');
                     jQuery('#form_19_submit').text('Espere...').prop('disabled', true);
                     try {
                         const urgency = jQuery('input[name="urgency"]:checked').val();
+                        const fuma = jQuery('input[name="fuma"]:checked').val();
+                        const enfermedad = jQuery('#enfermedad').val();
                         const precio = jQuery('input[name="precio"]:checked').val();
                         const barrier = jQuery('input[name="barrier"]:checked').val();
                         const peso = jQuery('#peso').val().replace('.', ',');
                         const altura = jQuery('#altura').val();
-                        const questionnaire = `URGENCY:${encodeURIComponent(urgency)} PRECIO:${encodeURIComponent(precio)} BARRIER:${encodeURIComponent(barrier)} PESO: ${encodeURIComponent(peso)} ALTURA: ${encodeURIComponent(altura)}`;
+                        const questionnaire = `URGENCY:${encodeURIComponent(urgency)} FUMA:${encodeURIComponent(fuma)} ENFERMEDAD:${encodeURIComponent(enfermedad)} PRECIO:${encodeURIComponent(precio)} BARRIER:${encodeURIComponent(barrier)} PESO: ${encodeURIComponent(peso)} ALTURA: ${encodeURIComponent(altura)}`;
 
                         landingUrl = currentUrl + " " + questionnaire;
 
@@ -594,7 +638,7 @@
                         const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensajeWhatsapp)}`;
 
                         // Disparar evento Schedule de Facebook si el presupuesto es sí y puede asistir
-                        if (precio === "Sí, cuento con el presupuesto" && urgency === "Inmediatamente" && barrier === "Si") {
+                        if (precio === "Sí, cuento con el presupuesto" && urgency === "Lo más pronto posible" && barrier === "Si") {
                             fbq('track', 'Schedule');
                         }
                         fbq('track', 'Lead');
@@ -609,17 +653,17 @@
                         jQuery('#multi_step_form')[0].reset();
                     } catch (error) {
                         console.error('Error en la petición AJAX:', error); // Imprime el error en la consola
-                        jQuery('#error-step5').text('Error enviando datos. Por favor intenta nuevamente.');
+                        jQuery('#error-step7').text('Error enviando datos. Por favor intenta nuevamente.');
                         jQuery('#form_19_submit').text('CONFIRMAR CITA ➜').prop('disabled', false);
                     }
                 } else {
-                    jQuery('#error-step5').text('Por favor, ingrese una fecha y una hora deseada para la cita antes de continuar.');
+                    jQuery('#error-step7').text('Por favor, ingrese una fecha y una hora deseada para la cita antes de continuar.');
                 }
             });
 
             function resetForm() {
                 jQuery('#multi_step_form')[0].reset();
-                jQuery('#error-step5').text('');
+                jQuery('#error-step7').text('');
                 jQuery('#form_19_submit').prop('disabled', false);
                 jQuery('#imc-result').text('');
             }
@@ -692,6 +736,8 @@
                         errorElement.show();
                         return;
                     }
+                } else if (currentStep === 4) {
+                    // No se requiere validación especial para el campo de texto de enfermedad
                 } else {
                     if (currentStepElement.find('input[type="radio"]:checked').length === 0) {
                         errorElement.text('Por favor, selecciona una opción antes de continuar.');
@@ -707,9 +753,9 @@
                 currentStepElement.hide();
                 nextStepElement.show();
                 // Enfocar en el inicio del formulario
-    jQuery('html, body').animate({
-        scrollTop: jQuery("#multi_step_form").offset().top
-    }, 500);
+                jQuery('html, body').animate({
+                    scrollTop: jQuery("#multi_step_form").offset().top
+                }, 500);
             }
         </script>
     </div>
