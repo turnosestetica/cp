@@ -245,27 +245,9 @@
                 autocomplete="new-password">
                 <p style="padding: 10px; text-align: center; background-color: lightyellow; font-size: 17px;">
                     Averigua ahora si eres candidata a Lipoescultura</p>
+
+                <!-- Step 1: Peso y Altura -->
                 <div class="step" id="step1">
-                    <p class="question-title">Ingresa tu DNI</p>
-                    <div class="form-field-container">
-                        <input type="text" id="dni" name="dni" placeholder="Escribe aquí tu DNI" maxlength="10">
-                    </div>
-                    <div class="error-message" id="error-step1"></div>
-                    <button type="button" class="continue-btn" onclick="nextStep(1)">Siguiente ➜</button>
-                </div>
-
-                <!-- Step 2: Edad -->
-                <div class="step" id="step2">
-                    <p class="question-title">Ingresa tu edad</p>
-                    <div class="form-field-container">
-                        <input type="number" id="edad" name="edad" placeholder="Escribe aquí tu edad">
-                    </div>
-                    <div class="error-message" id="error-step2"></div>
-                    <button type="button" class="continue-btn" onclick="nextStep(2)">Siguiente ➜</button>
-                </div>
-
-                <!-- Step 3: Peso y Altura -->
-                <div class="step" id="step3">
                     <p class="question-title">Ingresa tu peso y tu altura</p>
                     <div class="form-field-container">
                         <label class="form-field-label" for="peso">Peso (kg)</label>
@@ -284,9 +266,30 @@
                         </div>
                     </div>
                     <div id="imc-result"></div>
+                    <div class="error-message" id="error-step1"></div>
+                    <button type="button" class="continue-btn" onclick="nextStep(1)">Siguiente ➜</button>
+                </div>
+
+                <!-- Step 2: DNI -->
+                <div class="step" id="step2">
+                    <p class="question-title">Ingresa tu DNI</p>
+                    <div class="form-field-container">
+                        <input type="text" id="dni" name="dni" placeholder="Escribe aquí tu DNI" maxlength="10">
+                    </div>
+                    <div class="error-message" id="error-step2"></div>
+                    <button type="button" class="continue-btn" onclick="nextStep(2)">Siguiente ➜</button>
+                </div>
+
+                <!-- Step 3: Edad -->
+                <div class="step" id="step3">
+                    <p class="question-title">Ingresa tu edad</p>
+                    <div class="form-field-container">
+                        <input type="text" id="edad" name="edad" placeholder="Escribe aquí tu edad">
+                    </div>
                     <div class="error-message" id="error-step3"></div>
                     <button type="button" class="continue-btn" onclick="nextStep(3)">Siguiente ➜</button>
                 </div>
+
                 <!-- Step 4: Urgencia -->
                 <div class="step" id="step4">
                     <p class="question-title">¿Cuándo quieres reservar cirugía?</p>
@@ -511,9 +514,9 @@
                 jQuery('#peso, #altura').on('change', function () {
                     calculateIMC();
                     if (jQuery('#peso').val() && jQuery('#altura').val()) {
-                        jQuery('#step3 .continue-btn').prop('disabled', false);
+                        jQuery('#step1 .continue-btn').prop('disabled', false);
                     } else {
-                        jQuery('#step3 .continue-btn').prop('disabled', true);
+                        jQuery('#step1 .continue-btn').prop('disabled', true);
                     }
                 });
 
@@ -575,6 +578,7 @@
                     }));
                 }
             }
+
             function calculateIMC() {
                 const peso = parseFloat(jQuery('#peso').val());
                 const altura = parseFloat(jQuery('#altura').val()) / 100; // Convertir cm a metros
@@ -651,6 +655,8 @@
                     jQuery('#error-step12').text('');
                     jQuery('#form_19_submit').text('Espere...').prop('disabled', true);
                     try {
+                        const peso = jQuery('#peso').val().replace('.', ',');
+                        const altura = jQuery('#altura').val();
                         const dni = jQuery('#dni').val();
                         const edad = jQuery('#edad').val();
                         const urgency = jQuery('input[name="urgency"]:checked').val();
@@ -661,11 +667,9 @@
                         const lactancia = jQuery('input[name="lactancia"]:checked').val();
                         const precio = jQuery('input[name="precio"]:checked').val();
                         const barrier = jQuery('input[name="barrier"]:checked').val();
-                        const peso = jQuery('#peso').val().replace('.', ',');
-                        const altura = jQuery('#altura').val();
-                        const questionnaire = `DNI:${encodeURIComponent(dni)} EDAD:${encodeURIComponent(edad)} URGENCY:${encodeURIComponent(urgency)} FUMA:${encodeURIComponent(fuma)} ENFERMEDAD:${encodeURIComponent(enfermedad)} ALERGIA:${encodeURIComponent(alergia)} MEDICACION:${encodeURIComponent(medicacion)} LACTANCIA:${encodeURIComponent(lactancia)} PRECIO:${encodeURIComponent(precio)} BARRIER:${encodeURIComponent(barrier)} PESO: ${encodeURIComponent(peso)} ALTURA: ${encodeURIComponent(altura)}`;
+                        const questionnaire = `PESO: ${encodeURIComponent(peso)}\nALTURA: ${encodeURIComponent(altura)}\nDNI:${encodeURIComponent(dni)}\nEDAD:${encodeURIComponent(edad)}\nURGENCY:${encodeURIComponent(urgency)}\nFUMA:${encodeURIComponent(fuma)}\nENFERMEDAD:${encodeURIComponent(enfermedad)}\nALERGIA:${encodeURIComponent(alergia)}\nMEDICACION:${encodeURIComponent(medicacion)}\nLACTANCIA:${encodeURIComponent(lactancia)}\nPRECIO:${encodeURIComponent(precio)}\nBARRIER:${encodeURIComponent(barrier)}`;
 
-                        landingUrl = currentUrl + " " + questionnaire;
+                        landingUrl = currentUrl + "\n" + questionnaire;
 
                         console.log('Datos a enviar:', {
                             "fullname": nombre,
@@ -762,7 +766,7 @@
                 const errorFullName = jQuery('#error-fullname');
                 const errorFullNameTop = jQuery('#error-fullname-top');
                 const fullName = fullNameInput.val().trim();
-                if (fullName === '') {
+                                if (fullName === '') {
                     errorFullName.text('Por favor, ingresa tu nombre completo.');
                     errorFullNameTop.text('Por favor, ingresa tu nombre completo.');
                     fullNameInput.css('border-color', 'red');
@@ -788,20 +792,20 @@
 
                 // Validación para cada paso
                 if (currentStep === 1) {
+                    if (!jQuery('#peso').val() || !jQuery('#altura').val()) {
+                        errorElement.text('Por favor, completa todos los campos.');
+                        errorElement.show();
+                        return;
+                    }
+                } else if (currentStep === 2) {
                     if (jQuery('#dni').val().trim() === '') {
                         errorElement.text('Por favor, ingresa tu DNI.');
                         errorElement.show();
                         return;
                     }
-                } else if (currentStep === 2) {
-                    if (jQuery('#edad').val().trim() === '' || isNaN(jQuery('#edad').val())) {
-                        errorElement.text('Por favor, ingresa una edad válida.');
-                        errorElement.show();
-                        return;
-                    }
                 } else if (currentStep === 3) {
-                    if (!jQuery('#peso').val() || !jQuery('#altura').val()) {
-                        errorElement.text('Por favor, completa todos los campos.');
+                    if (jQuery('#edad').val().trim() === '') {
+                        errorElement.text('Por favor, ingresa tu edad.');
                         errorElement.show();
                         return;
                     }
