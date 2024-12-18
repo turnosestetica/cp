@@ -234,6 +234,26 @@
     <div class="thrv_wrapper thrv_custom_html_shortcode tve-droppable" data-tve-custom-html="1">
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0"></script>
 
+        <!-- Meta Pixel Code -->
+        <script>
+            !function (f, b, e, v, n, t, s) {
+                if (f.fbq) return; n = f.fbq = function () {
+                    n.callMethod ?
+                        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                };
+                if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+                n.queue = []; t = b.createElement(e); t.async = !0;
+                t.src = v; s = b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t, s)
+            }(window, document, 'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '1097974784609292'); // REEMPLAZA 'YOUR-PIXEL-ID' con tu ID de píxel
+            fbq('track', 'PageView');
+        </script>
+        <noscript><img height="1" width="1" style="display:none"
+                src="https://www.facebook.com/tr?id=1097974784609292&ev=PageView&noscript=1" /></noscript>
+        <!-- End Meta Pixel Code -->
+
         <div class="popover" aria-labelledby="popoverLabel" aria-hidden="true">
             <div class="header-container">
                 <img src="https://www.cpcirugiaestetica.com/images/logo.png" alt="Logo">
@@ -404,7 +424,8 @@
 
                 <!-- Step 12: Formulario de Cita -->
                 <div class="step" id="step12">
-                    <p style="background-color: #e9f5e9; margin-bottom: 5px; padding: 10px; font-size: 16px; border-radius: 8px;">
+                    <p
+                        style="background-color: #e9f5e9; margin-bottom: 5px; padding: 10px; font-size: 16px; border-radius: 8px;">
                         ¡Eres
                         una potencial candidata a Lipoescultura! Si quieres agendar tu cita de valoración, selecciona
                         debajo la fecha y hora deseada.</p>
@@ -454,7 +475,7 @@
 
         <script>
             jQuery(document).ready(function () {
-                const appScriptUrl = 'https://script.google.com/macros/s/AKfycbyha1A56RFX3WHnhE-Y-g4EsJLF9-uUUwYlYvuDaqTNSbgtOsAi3lDFatlAopsEkbce/exec';
+                const appScriptUrl = 'https://script.google.com/macros/s/AKfycbxwU9sphyYVQMI3GAzfvlvUtRFchehL-yPAkiqy0VxcpNAHs7NyL9Cfy4J7tbD7c59R/exec'; // <-- Nuevo Endpoint
                 let horariosDisponibles = {}; // Variable global para almacenar los horarios
 
                 // Función para obtener y procesar los horarios disponibles
@@ -538,7 +559,12 @@
                 jQuery("#pocoscupos").text(numeroAleatorio);
 
                 //fetchAvailableAppointments(); ya no se usa, ya que se usa obtenerHorarios()
-                jQuery('#date').change(populateHourSelect);
+
+                function populateHourSelect() {
+                    // ya no se usa
+                }
+
+                jQuery('#date').change(populateHourSelect); // <-- Llamada a change despues de la definicion de la funcion
             });
 
             function populateWeightSelect() {
@@ -667,8 +693,11 @@
                         const lactancia = jQuery('input[name="lactancia"]:checked').val();
                         const precio = jQuery('input[name="precio"]:checked').val();
                         const barrier = jQuery('input[name="barrier"]:checked').val();
-                        const questionnaire = `PESO: ${encodeURIComponent(peso)}\nALTURA: ${encodeURIComponent(altura)}\nDNI:${encodeURIComponent(dni)}\nEDAD:${encodeURIComponent(edad)}\nURGENCY:${encodeURIComponent(urgency)}\nFUMA:${encodeURIComponent(fuma)}\nENFERMEDAD:${encodeURIComponent(enfermedad)}\nALERGIA:${encodeURIComponent(alergia)}\nMEDICACION:${encodeURIComponent(medicacion)}\nLACTANCIA:${encodeURIComponent(lactancia)}\nPRECIO:${encodeURIComponent(precio)}\nBARRIER:${encodeURIComponent(barrier)}`;
 
+                        // Construye questionnaire con todos los datos, separados por \n
+                        const questionnaire = `PESO: ${encodeURIComponent(peso)}\nALTURA: ${encodeURIComponent(altura)}\nDNI: ${encodeURIComponent(dni)}\nEDAD: ${encodeURIComponent(edad)}\nURGENCY: ${encodeURIComponent(urgency)}\nFUMA: ${encodeURIComponent(fuma)}\nENFERMEDAD: ${encodeURIComponent(enfermedad)}\nALERGIA: ${encodeURIComponent(alergia)}\nMEDICACION: ${encodeURIComponent(medicacion)}\nLACTANCIA: ${encodeURIComponent(lactancia)}\nPRECIO: ${encodeURIComponent(precio)}\nBARRIER: ${encodeURIComponent(barrier)}`;
+
+                        // Concatena questionnaire a landingUrl con un separador \n
                         landingUrl = currentUrl + "\n" + questionnaire;
 
                         console.log('Datos a enviar:', {
@@ -681,7 +710,7 @@
                         });
 
                         const response = await jQuery.ajax({
-                            url: "https://script.google.com/macros/s/AKfycbxfbHy4-3oOMZfzD6cBk8GsLE6IF4lind24jRl6LVnpcf_akQNpQ1xk2qPODmb4Gvk/exec",
+                            url: "https://script.google.com/macros/s/AKfycbxwU9sphyYVQMI3GAzfvlvUtRFchehL-yPAkiqy0VxcpNAHs7NyL9Cfy4J7tbD7c59R/exec", // <-- Nuevo Endpoint
                             data: {
                                 "fullname": nombre,
                                 "whatsapp": whatsapp,
@@ -700,9 +729,9 @@
 
                         // Disparar evento Schedule de Facebook si el presupuesto es sí y puede asistir
                         if (precio === "Sí, cuento con el presupuesto" && urgency === "Lo más pronto posible" && barrier === "Si") {
-                            fbq('track', 'Schedule');
+                            fbq('track', 'Schedule'); // <-- Se ejecuta si fbq está definido
                         }
-                        fbq('track', 'Lead');
+                        fbq('track', 'Lead'); // <-- Se ejecuta si fbq está definido
 
                         // Redirigir a WhatsApp después de 2 segundos
                         jQuery('#whatsapp-link').attr('href', whatsappLink);
@@ -731,7 +760,7 @@
 
             jQuery(document).ready(function () {
                 jQuery('#fullname').on('input', function () {
-                    var fullname = jQuery(this).val().trim();
+                                        var fullname = jQuery(this).val().trim();
                     var names = fullname.split(' ');
                     var firstName = names[0];
                     var lastName = names.slice(1).join(' ');
@@ -766,7 +795,7 @@
                 const errorFullName = jQuery('#error-fullname');
                 const errorFullNameTop = jQuery('#error-fullname-top');
                 const fullName = fullNameInput.val().trim();
-                                if (fullName === '') {
+                if (fullName === '') {
                     errorFullName.text('Por favor, ingresa tu nombre completo.');
                     errorFullNameTop.text('Por favor, ingresa tu nombre completo.');
                     fullNameInput.css('border-color', 'red');
