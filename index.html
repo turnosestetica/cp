@@ -139,13 +139,13 @@
         }
 
         .pricing-info p {
-            margin: 5px 0;
-            font-size: 15px !important;
-            text-align: center;
+            margin: 15px 0;
+            font-size: 14px !important;
+            text-align: left;
         }
 
         .pricing-info strong {
-            font-size: 16px;
+            font-size: 15px;
         }
 
         /* WhatsApp Validation */
@@ -382,7 +382,7 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
                 <!-- Step 10: Presupuesto -->
                 <div class="step" id="step10">
                     <div class="pricing-info">
-                        <p class="question-title">Precios Base:</p>
+                        <p class="question-title">Precios de referencia:</p>
                         <p><strong>Consulta:</strong> $20.000 pesos (pago anticipado obligatorio)</p>
                         <p><strong>Liposucción Vaser:</strong> Elimina grasa localizada utilizando ultrasonido, ideal
                             para definir y contornear. Desde 2500 USD, aproximadamente $2.775.000 pesos.</p>
@@ -410,8 +410,8 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
 
                 <!-- Step 11: Ubicación -->
                 <div class="step" id="step11">
-                    <p class="question-title">Estamos ubicados en Mayor Mario Efrain Arruabarrena 1792, X5000 Córdoba.
-                        ¿Puedes asistir sin problema a tu valoración?</p>
+                    <p class="question-title">Estamos ubicados en Mayor Mario Efrain Arruabarrena 1792, Córdoba capital.
+                        ¿Puedes asistir sin problema a tu evaluación?</p>
                     <div class="radio-container">
                         <label><input type="radio" name="barrier" value="Si">Si</label>
                         <label><input type="radio" name="barrier" value="No sé aún"> No sé aún</label>
@@ -422,11 +422,8 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
 
                 <!-- Step 12: Formulario de Cita -->
                 <div class="step" id="step12">
-                    <p
-                        style="background-color: #e9f5e9; margin-bottom: 5px; padding: 10px; font-size: 16px; border-radius: 8px;">
-                        ¡Eres
-                        una potencial candidata a Lipoescultura! Si quieres agendar tu cita de valoración, selecciona
-                        debajo la fecha y hora deseada.</p>
+                    <p style="background-color: #e9f5e9; margin-bottom: 5px; padding: 10px; font-size: 16px; border-radius: 8px;">
+                        ¡Sos  una potencial candidata! Si querés agendar tu cita de evaluación, seleccioná debajo la fecha y hora deseada.</p>
 
                     <div id="restoformdatospersonales">
                         <div class="form-field-container">
@@ -457,14 +454,9 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
                     <div id="whatsapp-match-feedback"></div>
                     <div class="error-message" id="error-fullname-top"></div>
                     <div class="error-message" id="error-step12"></div>
-                    <p class="final-message" style="font-size:14px;">Valoración: $20.000 pesos. Se requiere un pago
-                        anticipado de $20.000 para confirmar tu cita.</p>
+                    <p class="final-message" style="font-size:14px;">Consulta: $20.000 pesos. En el siguiente paso serás redireccionado a mercadopago para abonar y confirmar tu cita.</p>
                     <button type="button" id="form_19_submit" class="continue-btn">CONFIRMAR CITA ➜</button>
-                    <div id="whatsapp-link-container" style="display:none; margin-top: 20px;">
-                        <p>¡Ya casi terminas! Haz clic en el botón de WhatsApp para confirmar tu cita:</p>
-                        <a id="whatsapp-link" class="continue-btn" target="_blank" draggable="false">Enviar mensaje por
-                            WhatsApp</a>
-                    </div>
+              
                 </div>
             </form>
         </div>
@@ -577,9 +569,9 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
                 for (let i = 40; i <= 150; i++) {
                     for (let j = 0; j < 10; j++) {
                         let weight = i + (j / 10);
-                        let weightStr = weight.toFixed(1).replace('.', ',');
+                       let weightStr = weight.toFixed(1); // Valor directamente sin coma
                         select.append(jQuery('<option>', {
-                            value: weight.toFixed(1),
+                            value: weightStr, // Guardar como número sin coma
                             text: weightStr + ' kg'
                         }));
                     }
@@ -604,7 +596,7 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
             }
 
             function calculateIMC() {
-                const peso = parseFloat(jQuery('#peso').val());
+                  const peso = parseFloat(jQuery('#peso').val());
                 const altura = parseFloat(jQuery('#altura').val()) / 100; // Convertir cm a metros
 
                 if (peso && altura) {
@@ -675,81 +667,90 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
 
                 let landingUrl = currentUrl;
 
-                            if (fechaSeleccionada) {
-                    jQuery('#error-step12').text('');
-                    jQuery('#form_19_submit').text('Espere...').prop('disabled', true);
-                    
-                    try {
+
+                const peso = parseFloat(jQuery('#peso').val()); // Usar el valor directamente como número
+                const altura = parseFloat(jQuery('#altura').val()) / 100; // Usar el valor directamente como número y convertir a metros
+                const imc = (peso / (altura * altura));
+                const dni = jQuery('#dni').val();
+                const edad = jQuery('#edad').val();
+                const urgency = jQuery('input[name="urgency"]:checked').val();
+                const fuma = jQuery('input[name="fuma"]:checked').val();
+                const enfermedad = jQuery('#enfermedad').val();
+                const alergia = jQuery('input[name="alergia"]:checked').val();
+                const medicacion = jQuery('#medicacion').val();
+                const lactancia = jQuery('input[name="lactancia"]:checked').val();
+                const precio = jQuery('input[name="precio"]:checked').val();
+                const barrier = jQuery('input[name="barrier"]:checked').val();
+
+                // Construye questionnaire con formato mejorado
+                const questionnaire = `PESO: ${peso}\nALTURA: ${altura*100}\nDNI: ${dni}\nEDAD: ${edad}\nURGENCIA: ${urgency.replace(/%20/g, ' ')}\nFUMA: ${fuma}\nENFERMEDAD: ${enfermedad.replace(/%20/g, ' ')}\nALERGIA: ${alergia}\nMEDICACION: ${medicacion.replace(/%20/g, ' ')}\nLACTANCIA: ${lactancia}\nPRECIO: ${precio.replace(/%20/g, ' ')}\nASISTE: ${barrier}`;
+
+                // Concatena questionnaire a landingUrl con un separador \n
+                landingUrl = currentUrl + "\n" + questionnaire;
+
+                const scheduleCondition = imc < 30 && fuma === "No" && (urgency === "Lo más pronto posible" || urgency === "En 1 mes" || urgency === "En 2 meses");
+
+                  console.log('Datos a enviar:', {
+                    "fullname": nombre,
+                    "whatsapp": whatsapp,
+                    "tratamiento_interes": tratamientoInteres,
+                    "fecha_cita": fechaSeleccionada + ' ' + horaSeleccionada,
+                    "landingUrl": landingUrl,
+                    "estado": "NUEVO",
+                    "imc": imc,
+                    "scheduleCondition": scheduleCondition,
+                     "fuma": fuma,
+                    "urgencia": urgency
+                });
+
+                 Interrumpir el envío AJAX a la hoja de calculo
+                 if (fechaSeleccionada) {
+                     jQuery('#error-step12').text('');
+                     jQuery('#form_19_submit').text('Espere...').prop('disabled', true);
+                                    
+                     try {
                         
-                        const peso = jQuery('#peso').val().replace('.', ','); // Usar coma para decimales en peso
-                        const altura = jQuery('#altura').val().replace(',', '.'); // Usar punto para decimales en altura y se agrega replace para que cambie la coma por punto si fue ingresada
-                        const imc = peso / (altura * altura);
-                        const dni = jQuery('#dni').val();
-                        const edad = jQuery('#edad').val();
-                        const urgency = jQuery('input[name="urgency"]:checked').val();
-                        const fuma = jQuery('input[name="fuma"]:checked').val();
-                        const enfermedad = jQuery('#enfermedad').val();
-                        const alergia = jQuery('input[name="alergia"]:checked').val();
-                        const medicacion = jQuery('#medicacion').val();
-                        const lactancia = jQuery('input[name="lactancia"]:checked').val();
-                        const precio = jQuery('input[name="precio"]:checked').val();
-                        const barrier = jQuery('input[name="barrier"]:checked').val();
+                        
+                         const response = await jQuery.ajax({
+                             url: "https://script.google.com/macros/s/AKfycbxwU9sphyYVQMI3GAzfvlvUtRFchehL-yPAkiqy0VxcpNAHs7NyL9Cfy4J7tbD7c59R/exec", // <-- Nuevo Endpoint
+                             data: {
+                                 "fullname": nombre,
+                                 "whatsapp": whatsapp,
+                                 "tratamiento_interes": tratamientoInteres,
+                                 "fecha_cita": fechaSeleccionada + ' ' + horaSeleccionada,
+                                 "landingUrl": landingUrl,
+                                 "estado": "NUEVO"
+                             },
+                             type: "POST",
+                         });
 
-                        // Construye questionnaire con formato mejorado
-                        const questionnaire = `PESO: ${peso}\nALTURA: ${altura}\nDNI: ${dni}\nEDAD: ${edad}\nURGENCIA: ${urgency.replace(/%20/g, ' ')}\nFUMA: ${fuma}\nENFERMEDAD: ${enfermedad.replace(/%20/g, ' ')}\nALERGIA: ${alergia}\nMEDICACION: ${medicacion.replace(/%20/g, ' ')}\nLACTANCIA: ${lactancia}\nPRECIO: ${precio.replace(/%20/g, ' ')}\nASISTE: ${barrier}`;
-
-                        // Concatena questionnaire a landingUrl con un separador \n
-                        landingUrl = currentUrl + "\n" + questionnaire;
-
-                        console.log('Datos a enviar:', {
-                            "fullname": nombre,
-                            "whatsapp": whatsapp,
-                            "tratamiento_interes": tratamientoInteres,
-                            "fecha_cita": fechaSeleccionada + ' ' + horaSeleccionada,
-                            "landingUrl": landingUrl,
-                            "estado": "NUEVO"
-                        });
-
-                        const response = await jQuery.ajax({
-                            url: "https://script.google.com/macros/s/AKfycbxwU9sphyYVQMI3GAzfvlvUtRFchehL-yPAkiqy0VxcpNAHs7NyL9Cfy4J7tbD7c59R/exec", // <-- Nuevo Endpoint
-                            data: {
-                                "fullname": nombre,
-                                "whatsapp": whatsapp,
-                                "tratamiento_interes": tratamientoInteres,
-                                "fecha_cita": fechaSeleccionada + ' ' + horaSeleccionada,
-                                "landingUrl": landingUrl,
-                                "estado": "NUEVO"
-                            },
-                            type: "POST",
-                        });
-
-                        // Generar el mensaje de WhatsApp
-                        const whatsappNumber = '5492612186355';
-                        const mensajeWhatsapp = `Hola ya envié mi pedido de cita para Lipoescultura. Mi nombre es: ${nombre} y la cita la solicité para: ${fechaSeleccionada} ${horaSeleccionada}`;
-                        const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensajeWhatsapp)}`;
-
-                    if (precio === "Sí, cuento con el presupuesto" && barrier === "Si") {
-                if (imc < 30 && fuma === "No" && (urgency === "Lo más pronto posible" || urgency === "En 1 mes" || urgency === "En 2 meses")) {
-                    fbq('track', 'Schedule');
-                        }
-                        fbq('track', 'Lead'); // <-- Se ejecuta si fbq está definido
-}
-                        // Redirigir a WhatsApp después de 2 segundos
-                        jQuery('#whatsapp-link').attr('href', whatsappLink);
-                        jQuery('#whatsapp-link-container').show();
-                        jQuery('#form_19_submit').hide();
-                        setTimeout(function () {
-                            window.location.href = whatsappLink;
-                        }, 2000);
-                        jQuery('#multi_step_form')[0].reset();
-                    } catch (error) {
-                        console.error('Error en la petición AJAX:', error); // Imprime el error en la consola
-                        jQuery('#error-step12').text('Error enviando datos. Por favor intenta nuevamente.');
-                        jQuery('#form_19_submit').text('CONFIRMAR CITA ➜').prop('disabled', false);
+                         // Generar el mensaje de WhatsApp
+                        // const whatsappNumber = '5492612186355';
+                        // const mensajeWhatsapp = `Hola ya envié mi pedido de cita para Lipoescultura. Mi nombre es: ${nombre} y la cita la solicité para: ${fechaSeleccionada} ${horaSeleccionada}`;
+                        // const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensajeWhatsapp)}`;
+                            const linkmercadopago = 'https://mpago.la/2PPbrN3';
+                     if (precio === "Sí, cuento con el presupuesto" && barrier === "Si") {
+                         if (imc < 30 && fuma === "No" && (urgency === "Lo más pronto posible" || urgency === "En 1 mes" || urgency === "En 2 meses")) {
+                             fbq('track', 'Schedule');
+                         }
+                         fbq('track', 'Lead'); // <-- Se ejecuta si fbq está definido
                     }
-                } else {
-                    jQuery('#error-step12').text('Por favor, ingrese una fecha y una hora deseada para la cita antes de continuar.');
-                }
+                Redirigir a WhatsApp después de 2 segundos
+                 jQuery('#whatsapp-link').attr('href', whatsappLink);
+               //  jQuery('#whatsapp-link-container').show();
+                 jQuery('#form_19_submit').hide();
+                 setTimeout(function () {
+                     window.location.href = linkmercadopago;
+                          }, 2000);
+                         jQuery('#multi_step_form')[0].reset();
+                     } catch (error) {
+                         console.error('Error en la petición AJAX:', error); // Imprime el error en la consola
+                         jQuery('#error-step12').text('Error enviando datos. Por favor intenta nuevamente.');
+                         jQuery('#form_19_submit').text('CONFIRMAR CITA ➜').prop('disabled', false);
+                     }
+                 } else {
+                     jQuery('#error-step12').text('Por favor, ingrese una fecha y una hora deseada para la cita antes de continuar.');
+                 }
             });
 
             function resetForm() {
@@ -864,4 +865,4 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
     </div>
 </body>
 
-</html>
+</html>                         
