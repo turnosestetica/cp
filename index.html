@@ -234,22 +234,23 @@
     <div class="thrv_wrapper thrv_custom_html_shortcode tve-droppable" data-tve-custom-html="1">
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0"></script>
 
-        <!-- Meta Pixel Code -->
-        <script>
-            !function (f, b, e, v, n, t, s) {
-                if (f.fbq) return; n = f.fbq = function () {
-                    n.callMethod ?
-                        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-                };
-                if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
-                n.queue = []; t = b.createElement(e); t.async = !0;
-                t.src = v; s = b.getElementsByTagName(e)[0];
-                s.parentNode.insertBefore(t, s)
-            }(window, document, 'script',
-                'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '1097974784609292'); // REEMPLAZA 'YOUR-PIXEL-ID' con tu ID de píxel
-            fbq('track', 'PageView');
-        </script>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '925160276145071');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
         <noscript><img height="1" width="1" style="display:none"
                 src="https://www.facebook.com/tr?id=1097974784609292&ev=PageView&noscript=1" /></noscript>
         <!-- End Meta Pixel Code -->
@@ -727,9 +728,9 @@
                         const mensajeWhatsapp = `Hola ya envié mi pedido de cita para Lipoescultura. Mi nombre es: ${nombre} y la cita la solicité para: ${fechaSeleccionada} ${horaSeleccionada}`;
                         const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensajeWhatsapp)}`;
 
-                        // Disparar evento Schedule de Facebook si el presupuesto es sí y puede asistir
-                        if (precio === "Sí, cuento con el presupuesto" && urgency === "Lo más pronto posible" && barrier === "Si") {
-                            fbq('track', 'Schedule'); // <-- Se ejecuta si fbq está definido
+                    if (precio === "Sí, cuento con el presupuesto" && barrier === "Si") {
+                if (imc < 30 && fuma === "No" && (urgency === "Lo más pronto posible" || urgency === "En 1 mes" || urgency === "En 2 meses")) {
+                    fbq('track', 'Schedule');
                         }
                         fbq('track', 'Lead'); // <-- Se ejecuta si fbq está definido
 
