@@ -680,8 +680,10 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
                     jQuery('#form_19_submit').text('Espere...').prop('disabled', true);
                      let imc;
                     try {
+                        
                         const peso = jQuery('#peso').val().replace('.', ','); // Usar coma para decimales en peso
                         const altura = jQuery('#altura').val().replace(',', '.'); // Usar punto para decimales en altura y se agrega replace para que cambie la coma por punto si fue ingresada
+                         imc = peso / (altura * altura);
                         const dni = jQuery('#dni').val();
                         const edad = jQuery('#edad').val();
                         const urgency = jQuery('input[name="urgency"]:checked').val();
