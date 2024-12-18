@@ -577,9 +577,9 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
                 for (let i = 40; i <= 150; i++) {
                     for (let j = 0; j < 10; j++) {
                         let weight = i + (j / 10);
-                        let weightStr = weight.toFixed(1).replace('.', ',');
+                       let weightStr = weight.toFixed(1); // Valor directamente sin coma
                         select.append(jQuery('<option>', {
-                            value: weight.toFixed(1),
+                            value: weightStr, // Guardar como número sin coma
                             text: weightStr + ' kg'
                         }));
                     }
@@ -604,7 +604,7 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
             }
 
             function calculateIMC() {
-                const peso = parseFloat(jQuery('#peso').val());
+                  const peso = parseFloat(jQuery('#peso').val());
                 const altura = parseFloat(jQuery('#altura').val()) / 100; // Convertir cm a metros
 
                 if (peso && altura) {
@@ -676,9 +676,9 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
                 let landingUrl = currentUrl;
 
 
-                const peso = jQuery('#peso').val().replace('.', ','); // Usar coma para decimales en peso
-                const altura = jQuery('#altura').val().replace(',', '.'); // Usar punto para decimales en altura y se agrega replace para que cambie la coma por punto si fue ingresada
-                const imc = peso / (altura * altura);
+                const peso = parseFloat(jQuery('#peso').val()); // Usar el valor directamente como número
+                const altura = parseFloat(jQuery('#altura').val()) / 100; // Usar el valor directamente como número y convertir a metros
+                const imc = (peso / (altura * altura));
                 const dni = jQuery('#dni').val();
                 const edad = jQuery('#edad').val();
                 const urgency = jQuery('input[name="urgency"]:checked').val();
@@ -691,14 +691,14 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
                 const barrier = jQuery('input[name="barrier"]:checked').val();
 
                 // Construye questionnaire con formato mejorado
-                const questionnaire = `PESO: ${peso}\nALTURA: ${altura}\nDNI: ${dni}\nEDAD: ${edad}\nURGENCIA: ${urgency.replace(/%20/g, ' ')}\nFUMA: ${fuma}\nENFERMEDAD: ${enfermedad.replace(/%20/g, ' ')}\nALERGIA: ${alergia}\nMEDICACION: ${medicacion.replace(/%20/g, ' ')}\nLACTANCIA: ${lactancia}\nPRECIO: ${precio.replace(/%20/g, ' ')}\nASISTE: ${barrier}`;
+                const questionnaire = `PESO: ${peso}\nALTURA: ${altura*100}\nDNI: ${dni}\nEDAD: ${edad}\nURGENCIA: ${urgency.replace(/%20/g, ' ')}\nFUMA: ${fuma}\nENFERMEDAD: ${enfermedad.replace(/%20/g, ' ')}\nALERGIA: ${alergia}\nMEDICACION: ${medicacion.replace(/%20/g, ' ')}\nLACTANCIA: ${lactancia}\nPRECIO: ${precio.replace(/%20/g, ' ')}\nASISTE: ${barrier}`;
 
                 // Concatena questionnaire a landingUrl con un separador \n
                 landingUrl = currentUrl + "\n" + questionnaire;
 
                 const scheduleCondition = imc < 30 && fuma === "No" && (urgency === "Lo más pronto posible" || urgency === "En 1 mes" || urgency === "En 2 meses");
-                
-                console.log('Datos a enviar:', {
+
+                  console.log('Datos a enviar:', {
                     "fullname": nombre,
                     "whatsapp": whatsapp,
                     "tratamiento_interes": tratamientoInteres,
@@ -707,7 +707,7 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
                     "estado": "NUEVO",
                     "imc": imc,
                     "scheduleCondition": scheduleCondition,
-                    "fuma": fuma,
+                     "fuma": fuma,
                     "urgencia": urgency
                 });
 
@@ -715,7 +715,7 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
                 // if (fechaSeleccionada) {
                 //     jQuery('#error-step12').text('');
                 //     jQuery('#form_19_submit').text('Espere...').prop('disabled', true);
-                    
+                                    
                 //     try {
                         
                         
@@ -734,10 +734,8 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
 
                 //         // Generar el mensaje de WhatsApp
                 //         const whatsappNumber = '5492612186355';
-                //         const mensaje
-
-                                        // const mensajeWhatsapp = `Hola ya envié mi pedido de cita para Lipoescultura. Mi nombre es: ${nombre} y la cita la solicité para: ${fechaSeleccionada} ${horaSeleccionada}`;
-                                        // const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensajeWhatsapp)}`;
+                //         const mensajeWhatsapp = `Hola ya envié mi pedido de cita para Lipoescultura. Mi nombre es: ${nombre} y la cita la solicité para: ${fechaSeleccionada} ${horaSeleccionada}`;
+                //         const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensajeWhatsapp)}`;
 
                 //     if (precio === "Sí, cuento con el presupuesto" && barrier === "Si") {
                 //         if (imc < 30 && fuma === "No" && (urgency === "Lo más pronto posible" || urgency === "En 1 mes" || urgency === "En 2 meses")) {
@@ -875,4 +873,4 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
     </div>
 </body>
 
-</html>
+</html>                         
