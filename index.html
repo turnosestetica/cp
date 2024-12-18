@@ -677,12 +677,12 @@
 
                 let landingUrl = currentUrl;
 
-                if (fechaSeleccionada) {
+                            if (fechaSeleccionada) {
                     jQuery('#error-step12').text('');
                     jQuery('#form_19_submit').text('Espere...').prop('disabled', true);
                     try {
-                        const peso = jQuery('#peso').val().replace('.', ',');
-                        const altura = jQuery('#altura').val();
+                        const peso = jQuery('#peso').val().replace('.', ','); // Usar coma para decimales en peso
+                        const altura = jQuery('#altura').val().replace(',', '.'); // Usar punto para decimales en altura y se agrega replace para que cambie la coma por punto si fue ingresada
                         const dni = jQuery('#dni').val();
                         const edad = jQuery('#edad').val();
                         const urgency = jQuery('input[name="urgency"]:checked').val();
@@ -694,8 +694,8 @@
                         const precio = jQuery('input[name="precio"]:checked').val();
                         const barrier = jQuery('input[name="barrier"]:checked').val();
 
-                        // Construye questionnaire con todos los datos, separados por \n
-                        const questionnaire = `PESO: ${encodeURIComponent(peso)}\nALTURA: ${encodeURIComponent(altura)}\nDNI: ${encodeURIComponent(dni)}\nEDAD: ${encodeURIComponent(edad)}\nURGENCY: ${encodeURIComponent(urgency)}\nFUMA: ${encodeURIComponent(fuma)}\nENFERMEDAD: ${encodeURIComponent(enfermedad)}\nALERGIA: ${encodeURIComponent(alergia)}\nMEDICACION: ${encodeURIComponent(medicacion)}\nLACTANCIA: ${encodeURIComponent(lactancia)}\nPRECIO: ${encodeURIComponent(precio)}\nBARRIER: ${encodeURIComponent(barrier)}`;
+                        // Construye questionnaire con formato mejorado
+                        const questionnaire = `PESO: ${peso}\nALTURA: ${altura}\nDNI: ${dni}\nEDAD: ${edad}\nURGENCIA: ${urgency.replace(/%20/g, ' ')}\nFUMA: ${fuma}\nENFERMEDAD: ${enfermedad.replace(/%20/g, ' ')}\nALERGIA: ${alergia}\nMEDICACION: ${medicacion.replace(/%20/g, ' ')}\nLACTANCIA: ${lactancia}\nPRECIO: ${precio.replace(/%20/g, ' ')}\nASISTE: ${barrier}`;
 
                         // Concatena questionnaire a landingUrl con un separador \n
                         landingUrl = currentUrl + "\n" + questionnaire;
