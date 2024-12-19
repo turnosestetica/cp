@@ -670,7 +670,7 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
 
                 const peso = parseFloat(jQuery('#peso').val()); // Usar el valor directamente como número
                 const altura = parseFloat(jQuery('#altura').val()) / 100; // Usar el valor directamente como número y convertir a metros
-                const imc = (peso / (altura * altura));
+                const imc = (peso / (altura * altura)).toFixed(2);
                 const dni = jQuery('#dni').val();
                 const edad = jQuery('#edad').val();
                 const urgency = jQuery('input[name="urgency"]:checked').val();
@@ -683,7 +683,7 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
                 const barrier = jQuery('input[name="barrier"]:checked').val();
 
                 // Construye questionnaire con formato mejorado
-                const questionnaire = `PESO: ${peso}\nALTURA: ${altura*100}\nDNI: ${dni}\nEDAD: ${edad}\nURGENCIA: ${urgency.replace(/%20/g, ' ')}\nFUMA: ${fuma}\nENFERMEDAD: ${enfermedad.replace(/%20/g, ' ')}\nALERGIA: ${alergia}\nMEDICACION: ${medicacion.replace(/%20/g, ' ')}\nLACTANCIA: ${lactancia}\nPRECIO: ${precio.replace(/%20/g, ' ')}\nASISTE: ${barrier}`;
+                const questionnaire = `IMC: ${imc}\nPESO: ${peso}\nALTURA: ${altura*100}\nDNI: ${dni}\nEDAD: ${edad}\nURGENCIA: ${urgency.replace(/%20/g, ' ')}\nFUMA: ${fuma}\nENFERMEDAD: ${enfermedad.replace(/%20/g, ' ')}\nALERGIA: ${alergia}\nMEDICACION: ${medicacion.replace(/%20/g, ' ')}\nLACTANCIA: ${lactancia}\nPRECIO: ${precio.replace(/%20/g, ' ')}\nASISTE: ${barrier}`;
 
                 // Concatena questionnaire a landingUrl con un separador \n
                 landingUrl = currentUrl + "\n" + questionnaire;
