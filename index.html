@@ -184,7 +184,7 @@
             /* Centrar campos */
         }
 
-        #-result {
+        #imc-result {
             margin-top: 10px;
             font-size: 15px;
             padding: 10px;
@@ -283,7 +283,7 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
                             </select>
                         </div>
                     </div>
-                    <div id="-result"></div>
+                    <div id="imc-result"></div>
                     <div class="error-message" id="error-step1"></div>
                     <button type="button" class="continue-btn" onclick="nextStep(1)">Siguiente ➜</button>
                 </div>
@@ -670,7 +670,7 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
 
                 const peso = parseFloat(jQuery('#peso').val()); // Usar el valor directamente como número
                 const altura = parseFloat(jQuery('#altura').val()) / 100; // Usar el valor directamente como número y convertir a metros
-                const imc = (peso / (altura * altura)).toFixed(2);
+                const imc = (peso / (altura * altura));
                 const dni = jQuery('#dni').val();
                 const edad = jQuery('#edad').val();
                 const urgency = jQuery('input[name="urgency"]:checked').val();
@@ -683,7 +683,7 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
                 const barrier = jQuery('input[name="barrier"]:checked').val();
 
                 // Construye questionnaire con formato mejorado
-                const questionnaire = `IMC: ${imc}\nPESO: ${peso}\nALTURA: ${altura*100}\nDNI: ${dni}\nEDAD: ${edad}\nURGENCIA: ${urgency.replace(/%20/g, ' ')}\nFUMA: ${fuma}\nENFERMEDAD: ${enfermedad.replace(/%20/g, ' ')}\nALERGIA: ${alergia}\nMEDICACION: ${medicacion.replace(/%20/g, ' ')}\nLACTANCIA: ${lactancia}\nPRECIO: ${precio.replace(/%20/g, ' ')}\nASISTE: ${barrier}`;
+                const questionnaire = `PESO: ${peso}\nALTURA: ${altura*100}\nDNI: ${dni}\nEDAD: ${edad}\nURGENCIA: ${urgency.replace(/%20/g, ' ')}\nFUMA: ${fuma}\nENFERMEDAD: ${enfermedad.replace(/%20/g, ' ')}\nALERGIA: ${alergia}\nMEDICACION: ${medicacion.replace(/%20/g, ' ')}\nLACTANCIA: ${lactancia}\nPRECIO: ${precio.replace(/%20/g, ' ')}\nASISTE: ${barrier}`;
 
                 // Concatena questionnaire a landingUrl con un separador \n
                 landingUrl = currentUrl + "\n" + questionnaire;
@@ -757,7 +757,7 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
                 jQuery('#multi_step_form')[0].reset();
                 jQuery('#error-step12').text('');
                 jQuery('#form_19_submit').prop('disabled', false);
-                jQuery('#-result').text('');
+                jQuery('#imc-result').text('');
             }
 
             jQuery(document).ready(function () {
