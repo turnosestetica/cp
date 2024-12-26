@@ -123,7 +123,7 @@
             box-sizing: border-box;
         }
 
-        .validated- {
+        .validated-whatsapp {
             background-color: #e9f5e9;
             padding: 2px 5px;
             border-radius: 3px;
@@ -148,8 +148,8 @@
             font-size: 15px;
         }
 
-        /*  Validation */
-        #-match-feedback {
+        /* WhatsApp Validation */
+        #whatsapp-match-feedback {
             margin-bottom: 15px;
         }
 
@@ -445,10 +445,10 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
                         </div>
                         <div class="error-message" id="error-fullname"></div>
                         <div class="form-field-container">
-                            <label class="form-field-label" for=""><i class="fa fa-"
-                                    style="color: #25D366;"></i>  con código de área local</label>
-                            <input minlength="11" maxlength="13" required="" type="text" id="" name=""
-                                placeholder="Ingresa tu " value="54">
+                            <label class="form-field-label" for="whatsapp"><i class="fa fa-whatsapp"
+                                    style="color: #25D366;"></i> WhatsApp con código de área local</label>
+                            <input minlength="11" maxlength="13" required="" type="text" id="whatsapp" name="whatsapp"
+                                placeholder="Ingresa tu WhatsApp" value="54">
                         </div>
                     </div>
                     <div id="whatsapp-match-feedback"></div>
@@ -782,7 +782,7 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
                 });
 
                 // Agregar un texto explicativo
-                whatsappInput.before('<p style="font-size: 12px; color: #666;">Ingresá tu WhatsApp completo, incluyendo el código de área. Revisá que esté bieen escrito. Si no ingresás tu whatsapp válido no podremos confirmar tu cita.</p>');
+                whatsappInput.before('<p style="font-size: 12px; color: #666;">Ingrese su WhatsApp completo, incluyendo el código de área. Revisá detenidamente que esté correcto porque si no podemos contactarte tu cita no quedará confirmada.</p>');
 
                 const fullNameInput = jQuery('#fullname');
                 const fullNameFeedback = jQuery('<div id="fullname-feedback"></div>');
