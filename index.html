@@ -234,23 +234,32 @@
     <div class="thrv_wrapper thrv_custom_html_shortcode tve-droppable" data-tve-custom-html="1">
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0"></script>
 
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '925160276145071');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+        <!-- Meta Pixel Code -->
+        <script>
+            !function (f, b, e, v, n, t, s) {
+                if (f.fbq) return;
+                n = f.fbq = function () {
+                    n.callMethod ?
+                        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                };
+                if (!f._fbq) f._fbq = n;
+                n.push = n;
+                n.loaded = !0;
+                n.version = '2.0';
+                n.queue = [];
+                t = b.createElement(e);
+                t.async = !0;
+                t.src = v;
+                s = b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t, s)
+            }(window, document, 'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '925160276145071');
+            fbq('track', 'PageView');
+        </script>
+        <noscript><img height="1" width="1" style="display:none"
+                src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1" /></noscript>
+        <!-- End Meta Pixel Code -->
 
         <div class="popover" aria-labelledby="popoverLabel" aria-hidden="true">
             <div class="header-container">
@@ -456,7 +465,7 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
                     <div class="error-message" id="error-step12"></div>
                     <p class="final-message" style="font-size:14px;">Consulta: $20.000 pesos. En el siguiente paso serás redireccionado a mercadopago para abonar y confirmar tu cita.</p>
                     <button type="button" id="form_19_submit" class="continue-btn">CONFIRMAR CITA ➜</button>
-              
+
                 </div>
             </form>
         </div>
@@ -569,7 +578,7 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
                 for (let i = 40; i <= 150; i++) {
                     for (let j = 0; j < 10; j++) {
                         let weight = i + (j / 10);
-                       let weightStr = weight.toFixed(1); // Valor directamente sin coma
+                        let weightStr = weight.toFixed(1); // Valor directamente sin coma
                         select.append(jQuery('<option>', {
                             value: weightStr, // Guardar como número sin coma
                             text: weightStr + ' kg'
@@ -596,7 +605,7 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
             }
 
             function calculateIMC() {
-                  const peso = parseFloat(jQuery('#peso').val());
+                const peso = parseFloat(jQuery('#peso').val());
                 const altura = parseFloat(jQuery('#altura').val()) / 100; // Convertir cm a metros
 
                 if (peso && altura) {
@@ -667,7 +676,6 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
 
                 let landingUrl = currentUrl;
 
-
                 const peso = parseFloat(jQuery('#peso').val()); // Usar el valor directamente como número
                 const altura = parseFloat(jQuery('#altura').val()) / 100; // Usar el valor directamente como número y convertir a metros
                 const imc = (peso / (altura * altura)).toFixed(2);
@@ -690,7 +698,7 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
 
                 const scheduleCondition = imc < 30 && fuma === "No" && (urgency === "Lo más pronto posible" || urgency === "En 1 mes" || urgency === "En 2 meses");
 
-                  console.log('Datos a enviar:', {
+                console.log('Datos a enviar:', {
                     "fullname": nombre,
                     "whatsapp": whatsapp,
                     "tratamiento_interes": tratamientoInteres,
@@ -699,58 +707,56 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
                     "estado": "NUEVO",
                     "imc": imc,
                     "scheduleCondition": scheduleCondition,
-                     "fuma": fuma,
+                    "fuma": fuma,
                     "urgencia": urgency
                 });
 
-               
-                 if (fechaSeleccionada) {
-                     jQuery('#error-step12').text('');
-                     jQuery('#form_19_submit').text('Espere...').prop('disabled', true);
-                                    
-                     try {
-                        
-                        
-                         const response = await jQuery.ajax({
-                             url: "https://script.google.com/macros/s/AKfycbxwU9sphyYVQMI3GAzfvlvUtRFchehL-yPAkiqy0VxcpNAHs7NyL9Cfy4J7tbD7c59R/exec", // <-- Nuevo Endpoint
-                             data: {
-                                 "fullname": nombre,
-                                 "whatsapp": whatsapp,
-                                 "tratamiento_interes": tratamientoInteres,
-                                 "fecha_cita": fechaSeleccionada + ' ' + horaSeleccionada,
-                                 "landingUrl": landingUrl,
-                                 "estado": "NUEVO"
-                             },
-                             type: "POST",
-                         });
+                if (fechaSeleccionada) {
+                    jQuery('#error-step12').text('');
+                    jQuery('#form_19_submit').text('Espere...').prop('disabled', true);
 
-                         // Generar el mensaje de WhatsApp
-                         const whatsappNumber = '5492612186355';
-                         const mensajeWhatsapp = `Hola ya envié mi pedido de cita para Lipoescultura. Mi nombre es: ${nombre} y la cita la solicité para: ${fechaSeleccionada} ${horaSeleccionada}`;
-                         const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensajeWhatsapp)}`;
-                            const linkmercadopago = 'https://mpago.la/2PPbrN3';
-                     if (precio === "Sí, cuento con el presupuesto" && barrier === "Si") {
-                         if (imc < 30 && fuma === "No" && (urgency === "Lo más pronto posible" || urgency === "En 1 mes" || urgency === "En 2 meses")) {
-                             fbq('track', 'Schedule');
-                         }
-                         fbq('track', 'Lead'); // <-- Se ejecuta si fbq está definido
+                    try {
+
+                        const response = await jQuery.ajax({
+                            url: "https://script.google.com/macros/s/AKfycbxwU9sphyYVQMI3GAzfvlvUtRFchehL-yPAkiqy0VxcpNAHs7NyL9Cfy4J7tbD7c59R/exec", // <-- Nuevo Endpoint
+                            data: {
+                                "fullname": nombre,
+                                "whatsapp": whatsapp,
+                                "tratamiento_interes": tratamientoInteres,
+                                "fecha_cita": fechaSeleccionada + ' ' + horaSeleccionada,
+                                "landingUrl": landingUrl,
+                                "estado": "NUEVO"
+                            },
+                            type: "POST",
+                        });
+
+                        // Generar el mensaje de WhatsApp
+                        const whatsappNumber = '5492612186355';
+                        const mensajeWhatsapp = `Hola ya envié mi pedido de cita para Lipoescultura. Mi nombre es: ${nombre} y la cita la solicité para: ${fechaSeleccionada} ${horaSeleccionada}`;
+                                              const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensajeWhatsapp)}`;
+                        const linkmercadopago = 'https://mpago.la/2PPbrN3';
+                        if (precio === "Sí, cuento con el presupuesto" && barrier === "Si") {
+                            if (imc < 30 && fuma === "No" && (urgency === "Lo más pronto posible" || urgency === "En 1 mes" || urgency === "En 2 meses")) {
+                                fbq('track', 'Schedule');
+                            }
+                            fbq('track', 'Lead'); // <-- Se ejecuta si fbq está definido
+                        }
+
+                        jQuery('#whatsapp-link').attr('href', whatsappLink);
+                        //  jQuery('#whatsapp-link-container').show();
+                        jQuery('#form_19_submit').hide();
+                        setTimeout(function () {
+                            window.location.href = linkmercadopago;
+                        }, 2000);
+                        jQuery('#multi_step_form')[0].reset();
+                    } catch (error) {
+                        console.error('Error en la petición AJAX:', error); // Imprime el error en la consola
+                        jQuery('#error-step12').text('Error enviando datos. Por favor intenta nuevamente.');
+                        jQuery('#form_19_submit').text('CONFIRMAR CITA ➜').prop('disabled', false);
                     }
-              
-                 jQuery('#whatsapp-link').attr('href', whatsappLink);
-               //  jQuery('#whatsapp-link-container').show();
-                 jQuery('#form_19_submit').hide();
-                 setTimeout(function () {
-                     window.location.href = linkmercadopago;
-                          }, 2000);
-                         jQuery('#multi_step_form')[0].reset();
-                     } catch (error) {
-                         console.error('Error en la petición AJAX:', error); // Imprime el error en la consola
-                         jQuery('#error-step12').text('Error enviando datos. Por favor intenta nuevamente.');
-                         jQuery('#form_19_submit').text('CONFIRMAR CITA ➜').prop('disabled', false);
-                     }
-                 } else {
-                     jQuery('#error-step12').text('Por favor, ingrese una fecha y una hora deseada para la cita antes de continuar.');
-                 }
+                } else {
+                    jQuery('#error-step12').text('Por favor, ingrese una fecha y una hora deseada para la cita antes de continuar.');
+                }
             });
 
             function resetForm() {
@@ -762,7 +768,7 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
 
             jQuery(document).ready(function () {
                 jQuery('#fullname').on('input', function () {
-                                        var fullname = jQuery(this).val().trim();
+                    var fullname = jQuery(this).val().trim();
                     var names = fullname.split(' ');
                     var firstName = names[0];
                     var lastName = names.slice(1).join(' ');
@@ -810,11 +816,7 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
                 }
             }
 
-            jQuery('input[type="radio"]').on('change', function () {
-                const stepNumber = jQuery(this).closest('.step').attr('id').replace('step', '');
-                jQuery(`#step${stepNumber} .continue-btn`).prop('disabled', false);
-            });
-
+            // MODIFICACIÓN: Se agrega validación a la función nextStep
             function nextStep(currentStep) {
                 const nextStepId = currentStep + 1;
                 const currentStepElement = jQuery(`#step${currentStep}`);
@@ -829,33 +831,66 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
                         return;
                     }
                 } else if (currentStep === 2) {
-                    if (jQuery('#dni').val().trim() === '') {
-                        errorElement.text('Por favor, ingresa tu DNI.');
+                    if (jQuery('#dni').val().trim() === '' || jQuery('#dni').val().trim().length < 7) {
+                        errorElement.text('Por favor, ingresa un DNI válido.');
                         errorElement.show();
                         return;
                     }
                 } else if (currentStep === 3) {
-                    if (jQuery('#edad').val().trim() === '') {
-                        errorElement.text('Por favor, ingresa tu edad.');
+                    if (jQuery('#edad').val().trim() === '' || isNaN(jQuery('#edad').val()) || parseInt(jQuery('#edad').val()) < 18) {
+                        errorElement.text('Por favor, ingresa una edad válida (mayor a 18 años).');
                         errorElement.show();
                         return;
                     }
-                } else if (currentStep === 6 || currentStep === 8) {
-                    // No se requiere validación especial para campos de texto abiertos
-                } else if (currentStep !== 4 && currentStep !== 5 && currentStep !== 7 && currentStep !== 9 && currentStep !== 10 && currentStep !== 11) {
+                } else if (currentStep === 4) {
                     if (currentStepElement.find('input[type="radio"]:checked').length === 0) {
-                        errorElement.text('Por favor, selecciona una opción antes de continuar.');
+                        errorElement.text('Por favor, selecciona una opción.');
+                        errorElement.show();
+                        return;
+                    }
+                } else if (currentStep === 5) {
+                    if (currentStepElement.find('input[type="radio"]:checked').length === 0) {
+                        errorElement.text('Por favor, selecciona una opción.');
+                        errorElement.show();
+                        return;
+                    }
+                } else if (currentStep === 6) {
+                    //Validar enfermedades
+                } else if (currentStep === 7) {
+                    if (currentStepElement.find('input[type="radio"]:checked').length === 0) {
+                        errorElement.text('Por favor, selecciona una opción.');
+                        errorElement.show();
+                        return;
+                    }
+                } else if (currentStep === 8) {
+                    //Validar medicacion
+                } else if (currentStep === 9) {
+                    if (currentStepElement.find('input[type="radio"]:checked').length === 0) {
+                        errorElement.text('Por favor, selecciona una opción.');
+                        errorElement.show();
+                        return;
+                    }
+                } else if (currentStep === 10) {
+                    if (currentStepElement.find('input[type="radio"]:checked').length === 0) {
+                        errorElement.text('Por favor, selecciona una opción.');
+                        errorElement.show();
+                        return;
+                    }
+                } else if (currentStep === 11) {
+                    if (currentStepElement.find('input[type="radio"]:checked').length === 0) {
+                        errorElement.text('Por favor, selecciona una opción.');
                         errorElement.show();
                         return;
                     }
                 }
 
-                // Hide error message if a selection is made or input is filled
+                // Si no hay errores, ocultar el mensaje de error
                 errorElement.hide();
 
-                // Hide current step and show next step
+                // Ocultar el paso actual y mostrar el siguiente
                 currentStepElement.hide();
                 nextStepElement.show();
+
                 // Enfocar en el inicio del formulario
                 jQuery('html, body').animate({
                     scrollTop: jQuery("#multi_step_form").offset().top
@@ -865,4 +900,4 @@ src="https://www.facebook.com/tr?id=925160276145071&ev=PageView&noscript=1"
     </div>
 </body>
 
-</html>                         
+</html>
