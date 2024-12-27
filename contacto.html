@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmar Cita de Evaluación</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .popover {
+            width: 95%;
+            max-width: 500px;
+            margin: 20px auto; /* Added top margin for separation */
+            border: none;
+            overflow: hidden;
+        }
+
+        .continue-btn {
+            line-height: 1.5;
+            width: 100%;
+            font-size: 16px;
+            padding: 10px 0px;
+            font-weight: 600;
+            border-radius: 8px;
+            border: none;
+            background-color: #4ac959;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin: 10px auto; /* Added margin for spacing */
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .continue-btn:hover {
+            background-color: #36a843;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .popover {
+                width: 95%;
+            }
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .header-container img {
+            max-width: 100px;
+        }
+
+        .header-container div {
+            font-size: 0.9em;
+            margin-left: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="thrv_wrapper thrv_custom_html_shortcode tve-droppable" data-tve-custom-html="1">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0"></script>
+
+        <div class="popover" aria-labelledby="popoverLabel" aria-hidden="true">
+            <div class="header-container">
+                <img src="https://i.ibb.co/VHXKfZw/cplogo.jpg" alt="Logo">
+                <div>
+                    <span style="font-size: 1em;">📍</span> Mayor Arruabarrena 1792 - Córdoba Capital - Argentina
+                </div>
+            </div>
+
+            <div style="text-align: center; padding: 20px;">
+                <p style="font-size: 17px; margin-bottom: 20px;">Para confirmar tu asistencia a la cita de evaluación, puedes realizar el pago a través de Mercado Pago.</p>
+
+                <a href="https://mpago.la/2PPbrN3" class="continue-btn" target="_blank">Pagar la Cita de Evaluación</a>
+
+                <p style="margin-top: 20px; font-size: 16px;">¿Tienes alguna pregunta?</p>
+                <a href="https://wa.me/5493513444394" style="display: flex; align-items: center; justify-content: center; background-color: #25D366; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; width: fit-content; margin: 20px auto;">
+                    <i class="fa fa-whatsapp" style="margin-right: 10px;"></i> Contáctanos por WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
