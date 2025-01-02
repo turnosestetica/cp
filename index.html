@@ -647,10 +647,17 @@
                 // Validate WhatsApp number
                 const whatsapp = jQuery('#whatsapp').val().replace(/[\s()-]/g, "");
 
-                if (whatsapp.length > 13 || isNaN(whatsapp)) {
-                    jQuery('#error-step12').text('Por favor, ingresa un número de WhatsApp válido. Revisa que no te falte ningún número.');
-                    hasError = true;
-                }
+             if (whatsapp.length === 0) { // <----  Nueva condición para campo vacío
+        jQuery('#error-step12').text('Por favor, ingresa tu número de WhatsApp.');
+        jQuery('#whatsapp').css('border-color', 'red'); // Opcional: cambiar el borde
+        hasError = true;
+    } else if (whatsapp.length < 10 || whatsapp.length > 15 || isNaN(whatsapp)) { // Condición modificada
+        jQuery('#error-step12').text('Por favor, ingresa un número de WhatsApp válido con el código de área.');
+        jQuery('#whatsapp').css('border-color', 'red'); // Opcional: cambiar el borde
+        hasError = true;
+    } else {
+        jQuery('#whatsapp').css('border-color', ''); // Opcional: resetear el borde
+    }
 
                 if (!validateFullName()) {
                     return;
